@@ -86,9 +86,28 @@
         footer {
             margin-top: 80px;
             padding: 30px;
+            border-top: 1px solid #222;
+        }
+        footer p {
             color: #555;
             font-size: 0.9em;
-            border-top: 1px solid #222;
+            margin: 0;
+        }
+        /* Стили для ссылок-иконок в футере */
+        .social-links {
+            margin-top: 20px;
+        }
+        .social-links a {
+            color: #666;
+            font-size: 1.8em;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .social-links a:hover {
+            color: #007acc; /* Подсветка синим при наведении */
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -101,18 +120,18 @@
 
     <div class="container">
         <h2>Наши экосистемы</h2>
-
+        
         <div class="grid">
             <div class="card">
                 <h3>Catmotec Games</h3>
                 <p>Разработка независимых игровых миров. Главный проект студии: инди-игра «Паскаль и тайна цифрового леса».</p>
             </div>
-
+            
             <div class="card">
                 <h3>Pixel Cat Code</h3>
                 <p>Профессиональное программирование, создание софта и разработка цифровых систем на заказ под любые задачи.</p>
             </div>
-
+            
             <div class="card">
                 <h3>Catmotec Home</h3>
                 <p>Производство уникальных деревянных брелков-телефонов ручной работы с лазерным выжиганием.</p>
@@ -121,8 +140,18 @@
         </div>
     </div>
 
+    <!-- Подключаем библиотеку иконок Font Awesome -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+
     <footer>
-        &copy; 2026 Catmotec. Все права защищены. Главная база: Калининград.
+        <p>&copy; 2026 Catmotec. Все права защищены. Главная база: Калининград.</p>
+        <div class="social-links">
+            <!-- Рабочая ссылка на твой YouTube! -->
+            <a href="https://youtube.com" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <!-- Ссылки-заглушки для Telegram и ВК -->
+            <a href="#" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="#" target="_blank" title="ВКонтакте"><i class="fab fa-vk"></i></a>
+        </div>
     </footer>
 
 </body>
