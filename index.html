@@ -39,10 +39,13 @@
         }
         h2 {
             font-size: 1.8em;
-            margin-bottom: 30px;
+            margin-top: 40px;
+            margin-bottom: 20px;
             color: #f5f5f5;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
         }
-        /* Сетка для подразделений холдинга */
+        /* Сетка для подразделений и команды */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -73,7 +76,7 @@
             line-height: 1.5;
             margin-bottom: 15px;
         }
-        /* Фирменная плашка для неубиваемых брелков */
+        /* Фирменная плашка */
         .badge {
             background-color: #4cd137;
             color: black;
@@ -83,6 +86,43 @@
             font-weight: bold;
             display: inline-block;
         }
+        /* Стили для раздела О нас */
+        .about-text {
+            text-align: left;
+            background-color: #222;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #007acc;
+            line-height: 1.6;
+            color: #ddd;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .member-card {
+            background-color: #222;
+            padding: 20px 15px;
+            border-radius: 6px;
+            border: 1px solid #2cf;
+            transition: 0.3s;
+        }
+        .member-card:hover {
+            border-color: #4cd137;
+            transform: scale(1.02);
+        }
+        .member-card h4 {
+            margin: 0 0 5px 0;
+            color: #ffffff;
+            font-size: 1.1em;
+        }
+        .member-card .role {
+            color: #4cd137;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
         footer {
             margin-top: 80px;
             padding: 30px;
@@ -91,9 +131,11 @@
         footer p {
             color: #888;
             font-size: 14px;
-            margin-bottom: 15px;
+            margin: 0;
         }
-        /* Стили для текстовых меню-ссылок в футере */
+        .social-links {
+            margin-top: 20px;
+        }
         .social-links a {
             color: #007acc;
             font-weight: bold;
@@ -104,7 +146,7 @@
             display: inline-block;
         }
         .social-links a:hover {
-            color: #4cd137; /* При наведении подсвечивается зеленым, как плашка брелков */
+            color: #4cd137;
             transform: scale(1.05);
         }
     </style>
@@ -122,31 +164,64 @@
         <div class="grid">
             <div class="card">
                 <h3>Catmotec Games</h3>
-                <p>Разработка независимых игровых миров. Главный проект студии: инди-игра «Паскаль и тайна цифрового леса». А также другие проэкты студии: "Сумасшедшая Больница" и франшиза "Мир Котов".</p>
+                <p>Разработка независимых игровых миров. Флагманские проекты: франшиза «Мир Котов», инди-игра «Паскаль и тайна цифрового леса», а также грядущий хит «Сумасшедшая больница».</p>
             </div>
             
-             <div class="card">
+            <div class="card">
                 <h3>Catmotec Code</h3>
                 <p>Профессиональное программирование, создание софта и разработка цифровых систем на заказ под любые задачи.</p>
                 <p style="color: #4cd137; font-size: 0.9em; margin-top: 5px; font-weight: bold; margin-bottom: 5px;">
                     Музыка, биты и саунд-дизайн на заказ от Евгения!
                 </p>
-               <p style="color: #4cd137; font-size: 0.9em; margin-top: 0; font-weight: bold;">
-                   Рисунки и концепт-арты на заказ от Алисы и Артёма!</p>
+                <p style="color: #4cd137; font-size: 0.9em; margin-top: 0; font-weight: bold;">
+                    Рисунки и концепт-арты на заказ от Алисы и Артёма!
+                </p>
             </div>
             
             <div class="card">
                 <h3>Catmotec Home</h3>
-                <p>Производство уникальных деревянных брелков-телефонов, брелков-камер, брелков-планшетов и т.д ручной работы с выжиганием.</p>
+                <p>Производство уникальных деревянных брелков-телефонов, брелков-камер и мини-планшетов ручной работы с лазерным выжиганием.</p>
                 <div class="badge">Tested by 40°C & 1000 RPM</div>
             </div>
         </div>
+
+        <!-- НОВЫЙ РАЗДЕЛ: О НАШЕЙ СТУДИИ -->
+        <h2>О нас</h2>
+        <div class="about-text">
+            <p><strong>Catmotec</strong> — это независимый технологический холдинг, основанный в Чебоксарах с прицелом на будущую глобальную штаб-квартиру в Калининграде. Наша главная миссия — создавать душевные, запоминающиеся игры с крутым искусственным интеллектом, развивать культуру шведского минимализма и производить неубиваемые девайсы ручной работы.</p>
+            <p>Мы начинали с малого, вдохновляясь успехами лучших региональных инди-студий, и выросли в сплоченную команду мастеров своего дела, где каждый отвечает за свой ключевой сектор разработки.</p>
+        </div>
+
+        <!-- НОВЫЙ РАЗДЕЛ: НАША КОМАНДА -->
+        <h2>Наша команда</h2>
+        <div class="team-grid">
+            <div class="member-card">
+                <h4>Александр</h4>
+                <div class="role">CEO / Lead Developer / Программист</div>
+            </div>
+            <div class="member-card">
+                <h4>Егор</h4>
+                <div class="role">Программист</div>
+            </div>
+            <div class="member-card">
+                <h4>Евгений</h4>
+                <div class="role">Композитор / Музыкант</div>
+            </div>
+            <div class="member-card">
+                <h4>Алиса</h4>
+                <div class="role">Художник / Дизайнер / Концепт-арт</div>
+            </div>
+            <div class="member-card">
+                <h4>Артём</h4>
+                <div class="role">Художник / Концепт-арт/ Дизайнер</div>
+            </div>
+        </div>
+
     </div>
 
     <footer>
         <p>&copy; 2026 Catmotec. Все права защищены. Главная база: Калининград (Чебоксары).</p>
         <div class="social-links">
-            <!-- Стильные текстовые ссылки без капризных внешних картинок -->
             <a href="#" target="_blank" title="YouTube">[ YouTube ]</a>
             <a href="#" target="_blank" title="Telegram">[ Telegram ]</a>
             <a href="#" target="_blank" title="ВКонтакте">[ ВКонтакте ]</a>
@@ -155,3 +230,4 @@
 
 </body>
 </html>
+
