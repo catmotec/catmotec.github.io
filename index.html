@@ -39,7 +39,7 @@
         }
         h2 {
             font-size: 1.8em;
-            margin-top: 40px;
+            margin-top: 50px;
             margin-bottom: 20px;
             color: #f5f5f5;
             border-bottom: 1px solid #333;
@@ -86,15 +86,43 @@
             font-weight: bold;
             display: inline-block;
         }
-        /* Стили для раздела О нас */
-        .about-text {
+        /* Интерактивный таймлайн истории */
+        .timeline {
+            margin: 30px auto;
             text-align: left;
-            background-color: #222;
-            padding: 25px;
-            border-radius: 8px;
-            border-left: 4px solid #007acc;
-            line-height: 1.6;
+            position: relative;
+            padding-left: 20px;
+            border-left: 3px solid #007acc;
+        }
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            background: #4cd137;
+            border: 3px solid #1a1a1a;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .timeline-year {
+            font-weight: bold;
+            color: #4cd137;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        .timeline-text {
             color: #ddd;
+            font-size: 1em;
+            line-height: 1.5;
+            background-color: #222;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #333;
         }
         .team-grid {
             display: grid;
@@ -185,19 +213,53 @@
             </div>
         </div>
 
-        <!-- НОВЫЙ РАЗДЕЛ: О НАШЕЙ СТУДИИ -->
-        <h2>О нас</h2>
-        <div class="about-text">
-            <p><strong>Catmotec</strong> — это независимый технологический холдинг, основанный в Чебоксарах с прицелом на будущую глобальную штаб-квартиру в Калининграде. Наша главная миссия — создавать душевные, запоминающиеся игры с крутым искусственным интеллектом, развивать культуру шведского минимализма и производить неубиваемые девайсы ручной работы.</p>
-            <p>Мы начинали с малого, вдохновляясь успехами лучших региональных инди-студий, и выросли в сплоченную команду мастеров своего дела, где каждый отвечает за свой ключевой сектор разработки.</p>
+        <!-- ИСТОРИЯ ХОЛДИНГА -->
+        <h2>История создания студии</h2>
+        <div class="timeline">
+            
+            <div class="timeline-item">
+                <div class="timeline-year">Лето 2020</div>
+                <div class="timeline-text">Основание концепции. В Новочебоксарске создаётся первая идея игры «Битва». Идут пробы новых стилей рисования и детальное прописание истории каждого персонажа. Кошачьего мира в планах пока нет.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2021</div>
+                <div class="timeline-text">Первый показ друзьям. Концепция тепло принимается окружением, рождается идея переделать сюжет под мир котов, ведь их любят все! В мае на Дне Победы Александр и Евгений придумывают базу для хоррор-хита «Сумасшедшая Больница».</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2022</div>
+                <div class="timeline-text">Первый релиз. Появляются стартовые цифровые наработки. Формируется костяк легендарных котов: Гоня, Моня, Маня и Серик. Студия получает первое название «Игры 7 друзей» и запускает свой канал на YouTube.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2023</div>
+                <div class="timeline-text">Мерч и анимация. Выходят первые бумажные комиксы. Пишется сценарий для стоп-моушен фильма «Приключения Серика и Гони: Перемещение во времени!». Запускаются первые физические продукты: фирменные тетради, ручки и элементы питания. Студия меняет имя на «Super Game».</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2024</div>
+                <div class="timeline-text">Эпоха Майнкрафта. Кошачий мир постепенно переносится в Minecraft, где воссоздаются дома главных героев. Выходят 2 и 3 части легендарных блокнотов с лором. Студия переименовывается в «ProgrammCat», создаётся официальное сообщество ВКонтакте.</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2025</div>
+                <div class="timeline-text">Эра Pixel Cat. Команда проводит ребрендинг в «Pixel Cat Studios». Выходит в свет книга «Кто такие кошки», глобально расширяется игровой лор. Появляются первые программные наработки флагманской игры «Паскаль и тайны цифрового леса».</div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2026</div>
+                <div class="timeline-text">Экосистема Catmotec. Полностью прописан финальный лор игры про Паскаля. Холдинг получает взрослое имя «Catmotec» (CATMOtionTEChnology). Запускается официальный сайт catmotec.github.io, выводящий чебоксарско-калининградскую студию на мировую арену инди-девелопмента!</div>
+            </div>
+
         </div>
 
-        <!-- НОВЫЙ РАЗДЕЛ: НАША КОМАНДА -->
+        <!-- НАША КОМАНДА -->
         <h2>Наша команда</h2>
         <div class="team-grid">
             <div class="member-card">
                 <h4>Александр</h4>
-                <div class="role">CEO / Lead Developer / Программист</div>
+                <div class="role">CEO / Lead Developer</div>
             </div>
             <div class="member-card">
                 <h4>Егор</h4>
@@ -208,26 +270,3 @@
                 <div class="role">Композитор / Музыкант</div>
             </div>
             <div class="member-card">
-                <h4>Алиса</h4>
-                <div class="role">Художник / Дизайнер / Концепт-арт</div>
-            </div>
-            <div class="member-card">
-                <h4>Артём</h4>
-                <div class="role">Художник / Концепт-арт/ Дизайнер</div>
-            </div>
-        </div>
-
-    </div>
-
-    <footer>
-        <p>&copy; 2026 Catmotec. Все права защищены. Главная база: Калининград (Чебоксары).</p>
-        <div class="social-links">
-            <a href="#" target="_blank" title="YouTube">[ YouTube ]</a>
-            <a href="#" target="_blank" title="Telegram">[ Telegram ]</a>
-            <a href="#" target="_blank" title="ВКонтакте">[ ВКонтакте ]</a>
-        </div>
-    </footer>
-
-</body>
-</html>
-
