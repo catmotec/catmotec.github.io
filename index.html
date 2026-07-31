@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CATMOTEC | PIXEL EDITION</title>
@@ -22,7 +21,7 @@
             font-size: 20px;
             line-height: 1.4;
             padding: 2rem;
-            background-image: 
+            background-image:
                 linear-gradient(#0f120f 1px, transparent 1px),
                 linear-gradient(90deg, #0f120f 1px, transparent 1px);
             background-size: 32px 32px, 32px 32px;
@@ -50,7 +49,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(#0f120f 1px, transparent 1px),
                 linear-gradient(90deg, #0f120f 1px, transparent 1px);
             background-size: 40px 40px, 40px 40px;
@@ -103,7 +102,7 @@
 
         .pixel-bg::after {
             content: '';
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -117,6 +116,7 @@
             );
             pointer-events: none;
             animation: softFlicker 3s infinite alternate;
+            z-index: -1;
         }
 
         @keyframes softFlicker {
@@ -163,7 +163,7 @@
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
-            margin: 1.8rem 0 0.5rem 0;
+            margin: 1.8rem 0 0 0;
             border-top: 1px solid #2a3a2a;
             padding-top: 1.5rem;
         }
@@ -238,30 +238,31 @@
             cursor: pointer;
         }
 
-        .card[data-eco="games"]:hover {
+        /* ЦВЕТА КАРТОЧЕК ПРИ НАВЕДЕНИИ */
+        .card[data-modal="gamesModal"]:hover {
             border-color: #ff6666;
             background: #ff666610;
             box-shadow: 0 0 8px #ff666640;
         }
-        .card[data-eco="games"]:hover h3 {
+        .card[data-modal="gamesModal"]:hover h3 {
             color: #ff6666;
         }
 
-        .card[data-eco="code"]:hover {
+        .card[data-modal="codeModal"]:hover {
             border-color: #ffee66;
             background: #ffee6610;
             box-shadow: 0 0 8px #ffee6640;
         }
-        .card[data-eco="code"]:hover h3 {
+        .card[data-modal="codeModal"]:hover h3 {
             color: #ffee66;
         }
 
-        .card[data-eco="home"]:hover {
+        .card[data-modal="homeModal"]:hover {
             border-color: #66ccff;
             background: #66ccff10;
             box-shadow: 0 0 8px #66ccff40;
         }
-        .card[data-eco="home"]:hover h3 {
+        .card[data-modal="homeModal"]:hover h3 {
             color: #66ccff;
         }
 
@@ -280,7 +281,7 @@
             font-family: 'VT323', monospace;
             color: #9ab89a;
             font-size: 1rem;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
             line-height: 1.3;
         }
 
@@ -361,7 +362,7 @@
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 1rem;
         }
 
@@ -419,6 +420,24 @@
             color: #66ff66;
         }
 
+        .member-card[data-member="sergey"]:hover {
+            border-color: #ffa500;
+            background: #ffa50010;
+            box-shadow: 0 0 8px #ffa50040;
+        }
+        .member-card[data-member="sergey"]:hover h4 {
+            color: #ffa500;
+        }
+
+        .member-card[data-member="makar"]:hover {
+            border-color: #ffd700;
+            background: #ffd70010;
+            box-shadow: 0 0 8px #ffd70040;
+        }
+        .member-card[data-member="makar"]:hover h4 {
+            color: #ffd700;
+        }
+
         .member-card h4 {
             font-family: 'Press Start 2P', monospace;
             color: #2ecc2e;
@@ -426,12 +445,13 @@
             margin-bottom: 0.5rem;
             text-transform: uppercase;
             transition: color 0.2s ease;
+            line-height: 1.4;
         }
 
         .member-card .role {
             font-family: 'VT323', monospace;
             color: #6a8e6a;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
         .vk-contact {
@@ -453,7 +473,6 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            cursor: pointer;
         }
 
         .vk-button:hover {
@@ -501,7 +520,6 @@
             padding: 0.3rem 0.6rem;
             display: inline-block;
             transition: all 0.2s ease;
-            cursor: pointer;
         }
 
         .social-links a[data-social="youtube"]:hover {
@@ -525,6 +543,77 @@
             box-shadow: 0 0 8px #4d6aff40;
         }
 
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #0a0c0a;
+            border: 3px solid #2ecc2e;
+            box-shadow: 8px 8px 0px 0px #1a3a1a;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            background: #0a0c0a;
+            border-bottom: 2px solid #2ecc2e;
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header span {
+            font-family: 'Press Start 2P', monospace;
+            color: #2ecc2e;
+            font-size: 0.7rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: 1px solid #2ecc2e;
+            color: #2ecc2e;
+            font-family: monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.2rem 0.6rem;
+        }
+
+        .modal-close:hover {
+            background: #1a2a1a;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 0.8rem;
+            font-family: 'VT323', monospace;
+            font-size: 1rem;
+            color: #9ab89a;
+        }
+
+        .modal-body h4 {
+            font-family: 'Press Start 2P', monospace;
+            color: #2ecc2e;
+            font-size: 0.65rem;
+            margin: 1.2rem 0 0.5rem 0;
+            line-height: 1.4;
+        }
+
         @media (max-width: 700px) {
             body {
                 padding: 1rem;
@@ -534,185 +623,270 @@
             }
             .nav-links a {
                 font-size: 0.45rem;
+                padding: 0.3rem 0.5rem;
             }
             .vk-button {
                 font-size: 0.55rem;
                 padding: 0.8rem 1rem;
+            }
+            .modal-content {
+                width: 95%;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="pixel-bg">
-    <div class="pixel-rain" id="pixelRain"></div>
-</div>
+    <div class="pixel-bg">
+        <div class="pixel-rain" id="pixelRain"></div>
+    </div>
 
-<div class="container">
-    
-    <div class="terminal-header">
-        <h1>CATMOTEC</h1>
-        <div class="tagline">[ ИННОВАЦИИ ] [ ГЕЙМДЕВ ] [ ПИКСЕЛЬНАЯ ЭСТЕТИКА ]</div>
-        <div class="nav-links">
-            <a href="#" data-nav="ecosystems">[ ЭКОСИСТЕМЫ ]</a>
-            <a href="#" data-nav="history">[ ИСТОРИЯ ]</a>
-            <a href="#" data-nav="team">[ КОМАНДА ]</a>
-            <a href="#" data-nav="contact">[ КОНТАКТЫ ]</a>
+    <div class="container">
+
+        <div class="terminal-header">
+            <h1>CATMOTEC</h1>
+            <div class="tagline">[ ИННОВАЦИЯ ] [ ГЕЙМДЕВ ] [ ПИКСЕЛЬНАЯ ЭСТЕТИКА ]</div>
+            <div class="nav-links">
+                <a href="#" data-nav="ecosystems">[ ЭКОСИСТЕМЫ ]</a>
+                <a href="#" data-nav="history">[ ИСТОРИЯ ]</a>
+                <a href="#" data-nav="team">[ КОМАНДА ]</a>
+                <a href="#" data-nav="contact">[ КОНТАКТЫ ]</a>
+            </div>
+        </div>
+
+        <section id="ecosystems">
+            <h2>// НАШИ ЭКОСИСТЕМЫ</h2>
+            <div class="grid">
+                <div class="card" data-modal="gamesModal">
+                    <h3>◉ CATMOTEC GAMES</h3>
+                    <p><strong>Франшиза «Мир Котов»</strong><br>
+                    Узнавай сюжет из наших публикаций: комиксы, видео и многое другое!</p>
+                    <p><strong>«Паскаль и тайна цифрового леса»</strong><br>
+                    — пиксельная RPG-головоломка. Спаси Цифровой лес от вируса, найди три Печати и встреть загадочных существ!</p>
+                    <p><strong>«Сумасшедшая больница»</strong><br>
+                    — хоррор в пиксельной графике. Каскадёр пытается сбежать из заброшенной больницы от сумасшедшего мед-состава.</p>
+                    <div class="badge">▸ В РАЗРАБОТКЕ</div>
+                </div>
+
+                <div class="card" data-modal="codeModal">
+                    <h3>◉ CATMOTEC CODE</h3>
+                    <p>Профессиональное программирование, создание софта и разработка цифровых систем на заказ под любые задачи.</p>
+                    <p style="color: #2ecc2e;">Музыка от Евгения!</p>
+                    <p style="color: #2ecc2e;">Рисунки от Алисы и Артёма!</p>
+                    <p style="color: #2ecc2e;">Программный код от Александра и Егора!</p>
+                </div>
+
+                <div class="card" data-modal="homeModal">
+                    <h3>◉ CATMOTEC HOME</h3>
+                    <p><strong>Брелки на заказ</strong> — ручная работа, выжигание по дереву.</p>
+                    <p>📱 <strong>Каталог:</strong></p>
+                    <p>➤ Брелок-телефон (iPhone 17 Pro Max)</p>
+                    <p>➤ Брелок-камера (Retro 2000)</p>
+                    <p>➤ Брелок-планшет (MiniPad)</p>
+                    <p style="color: #ffcc00; font-weight: bold;">🔥 НОВИНКА! Брелоки-Монстрики</p>
+                    <div class="badge">✓ ПРОВЕРЕНО: 40°C & 1000 RPM</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="history">
+            <h2>// ИСТОРИЯ СОЗДАНИЯ</h2>
+            <button class="spoiler-btn" id="historyBtn">[ ▼ РАСКРЫТЬ ИСТОРИЮ СТУДИИ ▼ ]</button>
+            <div id="historyContent" class="hidden-content">
+                <div class="timeline">
+                    <div class="timeline-item"><div class="timeline-year">[2020]</div><div class="timeline-text">Основание концепции. В Новочебоксарске создаётся первая идея игры «Битва».</div></div>
+                    <div class="timeline-item"><div class="timeline-year">[2021]</div><div class="timeline-text">Первый показ друзьям. Рождается идея переделать сюжет под мир котов.</div></div>
+                    <div class="timeline-item"><div class="timeline-year">[2022]</div><div class="timeline-text">Первый релиз. Формируется костяк котов: Гоня, Моня, Маня и Серик.</div></div>
+                    <div class="timeline-item"><div class="timeline-year">[2023]</div><div class="timeline-text">Выходят первые комиксы. Студия меняет имя на «Super Game».</div></div>
+                    <div class="timeline-item"><div class="timeline-year">[2024]</div><div class="timeline-text">Мир котов в Minecraft. Студия переименовывается в «ProgrammCat».</div></div>
+                    <div class="timeline-item"><div class="timeline-year">[2025]</div><div class="timeline-text">Ребрендинг в «Pixel Cat Studios». Выходит книга «Кто такие кошки».</div></div>
+                    <div class="timeline-item"><div class="timeline-year">[2026]</div><div class="timeline-text">Экосистема CATMOTEC. Запуск официального сайта!</div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="team">
+            <h2>// НАША КОМАНДА</h2>
+            <div class="team-grid">
+                <div class="member-card" data-member="alexander"><h4>АЛЕКСАНДР</h4><div class="role">СОЗДАТЕЛЬ / ПРОГРАММИСТ</div></div>
+                <div class="member-card" data-member="egor"><h4>ЕГОР</h4><div class="role">ПРОГРАММИСТ</div></div>
+                <div class="member-card" data-member="evgeniy"><h4>ЕВГЕНИЙ</h4><div class="role">КОМПОЗИТОР / МУЗЫКАНТ</div></div>
+                <div class="member-card" data-member="alisa"><h4>АЛИСА</h4><div class="role">ХУДОЖНИК / ДИЗАЙНЕР</div></div>
+                <div class="member-card" data-member="artem"><h4>АРТЁМ</h4><div class="role">ХУДОЖНИК / ДИЗАЙНЕР</div></div>
+                <div class="member-card" data-member="sergey"><h4>СЕРГЕЙ</h4><div class="role">ФАСОВЩИК / МОНТАЖЕР</div></div>
+                <div class="member-card" data-member="makar"><h4>МАКАР</h4><div class="role">ПРОИЗВОДИТЕЛЬ БРЕЛКОВ</div></div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>// СВЯЗЬ С НАМИ</h2>
+            <div class="vk-contact">
+                <a href="https://vk.me/catmotec" class="vk-button" target="_blank">НАПИСАТЬ В СООБЩЕНИЯ VK</a>
+                <div class="contact-note">[ ПО ВОПРОСАМ СОТРУДНИЧЕСТВА, ЗАКАЗОВ И ПРЕДЛОЖЕНИЙ ]</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>■ CATMOTEC © 2026 ■ КАЛИНИНГРАД / ЧЕБОКСАРЫ ■<br>ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
+            <div class="social-links">
+                <a href="#" target="_blank" data-social="youtube">[ YT ]</a>
+                <a href="#" target="_blank" data-social="telegram">[ TG ]</a>
+                <a href="https://vk.com/catmotec" target="_blank" data-social="vk">[ VK ]</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО GAMES -->
+    <div id="gamesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><span>[ CATMOTEC GAMES ]</span><button class="modal-close">[ X ]</button></div>
+            <div class="modal-body">
+
+                <h4>🎮 ФРАНШИЗА «МИР КОТОВ»</h4>
+                <p>Узнавай сюжет из наших публикаций: комиксы, видео и многое другое!</p>
+
+                <h4>🌿 «ПАСКАЛЬ И ТАЙНА ЦИФРОВОГО ЛЕСА»</h4>
+                <p><strong>Для главной страницы:</strong><br>
+                Пиксельная RPG-головоломка, где дети учатся программированию через игру. Спаси Цифровой лес от вируса и найди три Печати создателей!</p>
+
+                <p><strong>Об игре:</strong><br>
+                Исследуйте мир, решайте логические головоломки и встречайте загадочных существ. Три финала, семь персонажей и четыре акта в пиксельной атмосфере ждут тебя!</p>
+
+                <p><strong>Ключевые персонажи:</strong><br>
+                ➤ Паскаль — юный исследователь<br>
+                ➤ Лиана — дух леса<br>
+                ➤ Фикс — филин-программист<br>
+                ➤ Глюк — дух ошибок<br>
+                ➤ Баг — бывший ИИ-помощник<br>
+                ➤ Корруптор — главный враг</p>
+
+                <h4>🏥 «СУМАСШЕДШАЯ БОЛЬНИЦА»</h4>
+                <p>Хоррор-игра в пиксельной графике. Каскадёр попадает в заброшенную больницу и пытается сбежать от сумасшедшего мед-состава.</p>
+
+                <p style="margin-top: 1rem; color: #2ecc2e;">[ В РАЗРАБОТКЕ ]</p>
+
+            </div>
         </div>
     </div>
 
-    <section id="ecosystems">
-        <h2>// НАШИ ЭКОСИСТЕМЫ</h2>
-        <div class="grid">
-            <div class="card" data-eco="games">
-                <h3>◉ CATMOTEC GAMES</h3>
-                <p>Разработка независимых игровых миров. Флагманские проекты: франшиза «Мир Котов», инди-игра «Паскаль и тайна цифрового леса», а также грядущий хит «Сумасшедшая больница».</p>
-                <div class="badge">▸ В РАЗРАБОТКЕ</div>
+    <!-- МОДАЛЬНОЕ ОКНО CODE (без сайтов и ботов) -->
+    <div id="codeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><span>[ CATMOTEC CODE ]</span><button class="modal-close">[ X ]</button></div>
+            <div class="modal-body">
+                <p>💻 <strong>Услуги:</strong></p>
+                <p>➤ Разработка игр на Unity / Godot</p>
+                <p>➤ Музыка на заказ (Евгений) — чиптюн, lo-fi, synthwave</p>
+                <p>➤ Пиксельная графика и концепт-арт (Алиса, Артём)</p>
+                <p>📧 <strong>По вопросам заказов:</strong> vk.me/catmotec</p>
             </div>
-            
-            <div class="card" data-eco="code">
-                <h3>◉ CATMOTEC CODE</h3>
-                <p>Профессиональное программирование, создание софта и разработка цифровых систем на заказ под любые задачи.</p>
-                <p style="color: #2ecc2e; font-size: 0.9rem; margin-top: 8px;">
-                    ♫ Музыка от Евгения!<br>
-                    ✎ Рисунки от Алисы и Артёма!
-                </p>
-            </div>
-            
-            <div class="card" data-eco="home">
-                <h3>◉ CATMOTEC HOME</h3>
-                <p>Производство уникальных деревянных брелков-телефонов, брелков-камер и мини-планшетов и т.д ручной работы выжиганием на заказ.</p>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО HOME -->
+    <div id="homeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><span>[ CATMOTEC HOME :: ЗАКАЗ БРЕЛКА ]</span><button class="modal-close">[ X ]</button></div>
+            <div class="modal-body">
+                <p><strong>Брелки на заказ</strong> — ручная работа, выжигание по дереву.</p>
+                <p>📱 <strong>Каталог:</strong></p>
+                <p>➤ Брелок-телефон (iPhone 17 Pro Max)</p>
+                <p>➤ Брелок-камера (Retro 2000)</p>
+                <p>➤ Брелок-планшет (MiniPad)</p>
+                <p style="color: #ffcc00; font-weight: bold;">🔥 НОВИНКА! Брелоки-Монстрики</p>
                 <div class="badge">✓ ПРОВЕРЕНО: 40°C & 1000 RPM</div>
+                <p style="margin-top: 1rem; color: #2ecc2e;">[ Чтобы заказать — напишите в VK! ]</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section id="history">
-        <h2>// ИСТОРИЯ СОЗДАНИЯ</h2>
-        
-        <button class="spoiler-btn" id="historyBtn">[ ▼ РАСКРЫТЬ ИСТОРИЮ СТУДИИ ▼ ]</button>
-        
-        <div id="historyContent" class="hidden-content">
-            <div class="timeline">
-                <div class="timeline-item"><div class="timeline-year">[2020]</div><div class="timeline-text">Основание концепции. Создаётся первая идея игры «Битва».</div></div>
-                <div class="timeline-item"><div class="timeline-year">[2021]</div><div class="timeline-text">Первый показ друзьям. Рождается идея переделать сюжет под мир котов.</div></div>
-                <div class="timeline-item"><div class="timeline-year">[2022]</div><div class="timeline-text">Первый релиз. Формируется костяк котов: Гоня, Моня, Маня и Серик.</div></div>
-                <div class="timeline-item"><div class="timeline-year">[2023]</div><div class="timeline-text">Выходят первые комиксы. Студия меняет имя на «Super Game».</div></div>
-                <div class="timeline-item"><div class="timeline-year">[2024]</div><div class="timeline-text">Мир котов в Minecraft. Студия переименовывается в «ProgrammCat».</div></div>
-                <div class="timeline-item"><div class="timeline-year">[2025]</div><div class="timeline-text">Ребрендинг в «Pixel Cat Studios». Выходит книга «Кто такие кошки».</div></div>
-                <div class="timeline-item"><div class="timeline-year">[2026]</div><div class="timeline-text">Экосистема CATMOTEC. Запуск официального сайта!</div></div>
-            </div>
-        </div>
-    </section>
+    <script>
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('data-nav');
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
 
-    <section id="team">
-        <h2>// НАША КОМАНДА</h2>
-        <div class="team-grid">
-            <div class="member-card" data-member="alexander"><h4>АЛЕКСАНДР</h4><div class="role">СОЗДАТЕЛЬ / ПРОГРАММИСТ</div></div>
-            <div class="member-card" data-member="egor"><h4>ЕГОР</h4><div class="role">ПРОГРАММИСТ</div></div>
-            <div class="member-card" data-member="evgeniy"><h4>ЕВГЕНИЙ</h4><div class="role">КОМПОЗИТОР / МУЗЫКАНТ</div></div>
-            <div class="member-card" data-member="alisa"><h4>АЛИСА</h4><div class="role">ХУДОЖНИК / ДИЗАЙНЕР</div></div>
-            <div class="member-card" data-member="artem"><h4>АРТЁМ</h4><div class="role">ХУДОЖНИК / ДИЗАЙНЕР</div></div>
-        </div>
-    </section>
+        const cards = document.querySelectorAll('.card');
+        const modals = document.querySelectorAll('.modal');
 
-    <section id="contact">
-        <h2>// СВЯЗЬ С НАМИ</h2>
-        <div class="vk-contact">
-            <a href="https://vk.me/catmotec" class="vk-button" target="_blank">
-                НАПИСАТЬ В СООБЩЕНИЯ VK
-            </a>
-            <div class="contact-note">
-                [ ПО ВОПРОСАМ СОТРУДНИЧЕСТВА, ЗАКАЗОВ И ПРЕДЛОЖЕНИЙ ]
-            </div>
-        </div>
-    </section>
+        cards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                const modalId = card.getAttribute('data-modal');
+                if (modalId) {
+                    const modal = document.getElementById(modalId);
+                    if (modal) {
+                        modal.style.display = 'flex';
+                    }
+                }
+            });
+        });
 
-    <footer>
-        <p>■ CATMOTEC © 2026 ■ КАЛИНИНГРАД / ЧЕБОКСАРЫ ■<br>ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
-        <div class="social-links">
-            <a href="#" target="_blank" data-social="youtube">[ YT ]</a>
-            <a href="#" target="_blank" data-social="telegram">[ TG ]</a>
-            <a href="https://vk.com/catmotec" target="_blank" data-social="vk">[ VK ]</a>
-        </div>
-    </footer>
-</div>
-
-<script>
-    // === ПЛАВНАЯ ПРОКРУТКА ПРИ КЛИКЕ НА МЕНЮ ===
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('data-nav');
-            const targetSection = document.getElementById(targetId);
-            if (targetSection) {
-                targetSection.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
+        modals.forEach(modal => {
+            const closeBtn = modal.querySelector('.modal-close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    modal.style.display = 'none';
                 });
             }
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
         });
-    });
-    
-    // МЕДЛЕННЫЙ ПИКСЕЛЬНЫЙ ДОЖДЬ
-    function createPixelRain() {
-        const rainContainer = document.getElementById('pixelRain');
-        const symbols = ['0', '1', '█', '▒', '◆', '■', '●', '◉', '▸', '▼'];
-        
-        const dropCount = Math.floor(Math.random() * 8) + 8;
-        
-        for (let i = 0; i < dropCount; i++) {
-            const drop = document.createElement('div');
-            drop.className = 'drop';
-            
-            const left = Math.random() * 98 + 1;
-            const duration = 25 + Math.random() * 20;
-            const delay = Math.random() * 30;
-            const charCount = 1 + Math.floor(Math.random() * 3);
-            const opacity = 0.15 + Math.random() * 0.2;
-            
-            let text = '';
-            for (let j = 0; j < charCount; j++) {
-                text += symbols[Math.floor(Math.random() * symbols.length)];
-            }
-            
-            drop.style.left = left + '%';
-            drop.style.animationDuration = duration + 's';
-            drop.style.animationDelay = -delay + 's';
-            drop.style.opacity = opacity;
-            drop.textContent = text;
-            
-            rainContainer.appendChild(drop);
-        }
-    }
-    
-    window.addEventListener('load', () => {
-        createPixelRain();
-    });
-    
-    let resizeTimeout;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            document.getElementById('pixelRain').innerHTML = '';
-            createPixelRain();
-        }, 500);
-    });
-    
-    // СПОЙЛЕР
-    const historyBtn = document.getElementById('historyBtn');
-    const historyContent = document.getElementById('historyContent');
 
-    historyBtn.addEventListener('click', function() {
-        historyContent.classList.toggle('show');
-        
-        if (historyContent.classList.contains('show')) {
-            historyBtn.innerHTML = '[ ▲ СВЕРНУТЬ ИСТОРИЮ СТУДИИ ▲ ]';
-        } else {
-            historyBtn.innerHTML = '[ ▼ РАСКРЫТЬ ИСТОРИЮ СТУДИИ ▼ ]';
+        function createPixelRain() {
+            const rainContainer = document.getElementById('pixelRain');
+            const symbols = ['0', '1', '█', '▒', '◆', '■', '●', '◉', '▸', '▼'];
+            const dropCount = Math.floor(Math.random() * 8) + 8;
+
+            for (let i = 0; i < dropCount; i++) {
+                const drop = document.createElement('div');
+                drop.className = 'drop';
+                drop.style.left = (Math.random() * 98 + 1) + '%';
+                drop.style.animationDuration = (25 + Math.random() * 20) + 's';
+                drop.style.animationDelay = -(Math.random() * 30) + 's';
+                drop.style.opacity = 0.15 + Math.random() * 0.2;
+
+                let text = '';
+                for (let j = 0; j < 1 + Math.floor(Math.random() * 3); j++) {
+                    text += symbols[Math.floor(Math.random() * symbols.length)];
+                }
+                drop.textContent = text;
+                rainContainer.appendChild(drop);
+            }
         }
-    });
-</script>
+
+        window.addEventListener('load', createPixelRain);
+
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                document.getElementById('pixelRain').innerHTML = '';
+                createPixelRain();
+            }, 500);
+        });
+
+        const historyBtn = document.getElementById('historyBtn');
+        const historyContent = document.getElementById('historyContent');
+
+        historyBtn.addEventListener('click', () => {
+            historyContent.classList.toggle('show');
+            historyBtn.innerHTML = historyContent.classList.contains('show') ?
+                '[ ▲ СВЕРНУТЬ ИСТОРИЮ СТУДИИ ▲ ]' :
+                '[ ▼ РАСКРЫТЬ ИСТОРИЮ СТУДИИ ▼ ]';
+        });
+    </script>
 
 </body>
 </html>
