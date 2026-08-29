@@ -238,7 +238,6 @@
             cursor: pointer;
         }
 
-        /* ЦВЕТА КАРТОЧЕК ПРИ НАВЕДЕНИИ */
         .card[data-modal="gamesModal"]:hover {
             border-color: #ff6666;
             background: #ff666610;
@@ -685,6 +684,7 @@
                     <p>➤ Брелок-планшет (MiniPad)</p>
                     <p style="color: #ffcc00; font-weight: bold;">🔥 НОВИНКА! Брелоки-Монстрики</p>
                     <div class="badge">✓ ПРОВЕРЕНО: 40°C & 1000 RPM</div>
+                    <button class="badge" style="cursor: pointer; margin-top: 10px; border-color: #66ccff; color: #66ccff;" onclick="document.getElementById('homeModal').style.display='flex'; setTimeout(() => document.getElementById('serialInput').focus(), 100);">🔍 Проверить серийный номер</button>
                 </div>
             </div>
         </section>
@@ -727,7 +727,7 @@
         </section>
 
         <footer>
-            <p>■ CATMOTEC © 2026 ■ ЧЕБОКСАРЫ / КАЛИНИНГРАД ■<br>ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
+            <p>■ CATMOTEC © 2026 ■ КАЛИНИНГРАД / ЧЕБОКСАРЫ ■<br>ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
             <div class="social-links">
                 <a href="#" target="_blank" data-social="youtube">[ YT ]</a>
                 <a href="#" target="_blank" data-social="telegram">[ TG ]</a>
@@ -760,6 +760,10 @@
                 ➤ Баг — бывший ИИ-помощник<br>
                 ➤ Корруптор — главный враг</p>
 
+                <p><strong>Скачать / Играть:</strong><br>
+                Попробуй первый билд на itch.io!<br>
+                <a href="#" style="color: #2ecc2e; text-decoration: underline;">[Ссылка на вашу страницу itch.io]</a></p>
+
                 <h4>🏥 «СУМАСШЕДШАЯ БОЛЬНИЦА»</h4>
                 <p>Хоррор-игра в пиксельной графике. Каскадёр попадает в заброшенную больницу и пытается сбежать от сумасшедшего мед-состава.</p>
 
@@ -769,7 +773,7 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО CODE (без сайтов и ботов) -->
+    <!-- МОДАЛЬНОЕ ОКНО CODE -->
     <div id="codeModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><span>[ CATMOTEC CODE ]</span><button class="modal-close">[ X ]</button></div>
@@ -783,24 +787,26 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО HOME -->
+    <!-- МОДАЛЬНОЕ ОКНО HOME С ПРОВЕРКОЙ СЕРИЙНОГО НОМЕРА -->
     <div id="homeModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header"><span>[ CATMOTEC HOME :: ЗАКАЗ БРЕЛКА ]</span><button class="modal-close">[ X ]</button></div>
+            <div class="modal-header"><span>[ CATMOTEC HOME :: ПРОВЕРКА СЕРИЙНОГО НОМЕРА ]</span><button class="modal-close">[ X ]</button></div>
             <div class="modal-body">
-                <p><strong>Брелки на заказ</strong> — ручная работа, выжигание по дереву.</p>
-                <p>📱 <strong>Каталог:</strong></p>
-                <p>➤ Брелок-телефон (iPhone 17 Pro Max)</p>
-                <p>➤ Брелок-камера (Retro 2000)</p>
-                <p>➤ Брелок-планшет (MiniPad)</p>
-                <p style="color: #ffcc00; font-weight: bold;">🔥 НОВИНКА! Брелоки-Монстрики</p>
-                <div class="badge">✓ ПРОВЕРЕНО: 40°C & 1000 RPM</div>
-                <p style="margin-top: 1rem; color: #2ecc2e;">[ Чтобы заказать — напишите в VK! ]</p>
+                <p>📦 Введи серийный номер своего брелка или гаджета Catmotec!</p>
+                <div style="display: flex; gap: 10px; margin: 15px 0; flex-wrap: wrap;">
+                    <input type="text" id="serialInput" placeholder="Например: IE001" style="flex: 1; min-width: 150px; background: #0a0c0a; border: 2px solid #2a3a2a; color: #2ecc2e; padding: 10px; font-family: 'VT323', monospace; font-size: 1rem; outline: none; image-rendering: pixelated;">
+                    <button onclick="checkSerial()" style="background: #0a0c0a; border: 2px solid #2ecc2e; color: #2ecc2e; padding: 10px 20px; font-family: 'Press Start 2P', monospace; font-size: 0.6rem; cursor: pointer;">[ НАЙТИ ]</button>
+                </div>
+                <div id="serialResult" style="border: 1px solid #2a3a2a; padding: 15px; margin-top: 10px; min-height: 80px; display: none;">
+                    <!-- сюда будет выводиться результат -->
+                </div>
+                <p style="margin-top: 10px; color: #4a6a4a; font-size: 0.8rem;">💡 Если не знаешь номер — посмотри на упаковке или обратись в VK.</p>
             </div>
         </div>
     </div>
 
     <script>
+        // === ПЛАВНАЯ ПРОКРУТКА ===
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -815,6 +821,7 @@
             });
         });
 
+        // === МОДАЛЬНЫЕ ОКНА ===
         const cards = document.querySelectorAll('.card');
         const modals = document.querySelectorAll('.modal');
 
@@ -844,6 +851,7 @@
             });
         });
 
+        // === ПИКСЕЛЬНЫЙ ДОЖДЬ ===
         function createPixelRain() {
             const rainContainer = document.getElementById('pixelRain');
             const symbols = ['0', '1', '█', '▒', '◆', '■', '●', '◉', '▸', '▼'];
@@ -877,6 +885,7 @@
             }, 500);
         });
 
+        // === СПОЙЛЕР ===
         const historyBtn = document.getElementById('historyBtn');
         const historyContent = document.getElementById('historyContent');
 
@@ -885,6 +894,280 @@
             historyBtn.innerHTML = historyContent.classList.contains('show') ?
                 '[ ▲ СВЕРНУТЬ ИСТОРИЮ СТУДИИ ▲ ]' :
                 '[ ▼ РАСКРЫТЬ ИСТОРИЮ СТУДИИ ▼ ]';
+        });
+
+        // === БАЗА ДАННЫХ СЕРИЙНЫХ НОМЕРОВ ===
+        const seria = {
+            "IE001": {
+                "producer": "Catmotec",
+                "brand": "Apple",
+                "model": "iPhone 17 Pro Max",
+                "color": "голубой",
+                "sim_type": "SIM-лоток отсутствует",
+                "release_year": "09.2025",
+                "price": "59₽",
+                "user": "Александр (Крылов)"
+            },
+            "SA001": {
+                "producer": "Catmotec",
+                "brand": "Samsung",
+                "model": "Galaxy S25 Ultra",
+                "color": "чёрный",
+                "sim_type": "SIM-лоток есть",
+                "release_year": "10.2025",
+                "price": "59₽",
+                "user": "Евгений (Крылов)"
+            },
+            "IE002": {
+                "producer": "Catmotec",
+                "brand": "Apple",
+                "model": "iPhone 17 Pro Max",
+                "color": "красный",
+                "sim_type": "SIM-лоток отсутствует",
+                "release_year": "10.2025",
+                "price": "59₽",
+                "user": "Анастасия (Александрова)"
+            },
+            "IE003": {
+                "producer": "Catmotec",
+                "brand": "Apple",
+                "model": "iPhone 17 Pro",
+                "color": "белый",
+                "sim_type": "SIM-лоток есть",
+                "release_year": "10.2025",
+                "price": "59₽",
+                "user": "Роман (Васильев)"
+            },
+            "IE004": {
+                "producer": "Catmotec",
+                "brand": "Apple",
+                "model": "iPhone 13",
+                "color": "черный",
+                "sim_type": "SIM-лоток отсутствует",
+                "release_year": "10.2025",
+                "price": "39₽",
+                "user": "Алиса (Федотова)"
+            },
+            "IE005": {
+                "producer": "Catmotec",
+                "brand": "Apple",
+                "model": "iPhone 17",
+                "color": "голубой",
+                "sim_type": "SIM-лоток есть",
+                "release_year": "11.2025",
+                "price": "49₽",
+                "user": "Нина (Михайлова)"
+            },
+            "BR002": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок (Haval)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "07.2026",
+                "price": "99₽",
+                "user": "Сергей (Крылов)"
+            },
+            "BR003": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок (Niva)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "07.2026",
+                "price": "99₽",
+                "user": "Сергей (Крылов)"
+            },
+            "BM001": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "199₽",
+                "user": "Нина (Михайлова)"
+              },
+            "BM002": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "249₽",
+                "user": "Не указан"
+              },
+            "BM003": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "249₽",
+                "user": "Не указан"
+              },
+            "BM004": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "249₽",
+                "user": "Не указан"
+              },
+            "BM005": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "249₽",
+                "user": "Анастасия (Александрова)"
+            },
+            "SE001": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик (деформированный)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "07.2026",
+                "price": "169₽",
+                "user": "Александр (Крылов)"
+            },
+            "SE002": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик (деформированный)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "07.2026",
+                "price": "169₽",
+                "user": "Евгений (Крылов)"
+            },
+            "SE003": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик (деформированный)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "169₽",
+                "user": "Сергей (Андропов)"
+            },
+            "SE004": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик (деформированный)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "169₽",
+                "user": "Макар (Спиридонов)"
+            },
+            "BR004": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "БрелоКот (Серик)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "₽",
+                "user": ""
+            },
+            "BR005": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "БрелоКот (Моня)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "₽",
+                "user": ""
+            },
+            "BR006": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "БрелоКот (Гоня)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "₽",
+                "user": ""
+               },
+            "BR007": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "БрелоКот",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "₽",
+                "user": ""
+            },
+            "BR008": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок (Niva)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "69₽",
+                "user": "Сергей (Крылов)"
+            },
+            "BR001": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок (Toyota)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "06.2026",
+                "price": "69₽",
+                "user": "Евгений (Крылов)"
+            }
+        };
+
+        // === ФУНКЦИЯ ПРОВЕРКИ СЕРИЙНОГО НОМЕРА ===
+        function checkSerial() {
+            const input = document.getElementById('serialInput').value.trim().toUpperCase();
+            const resultDiv = document.getElementById('serialResult');
+
+            if (!input) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = '<p style="color: #ff6666;">❌ Введи серийный номер!</p>';
+                return;
+            }
+
+            const info = seria[input];
+            if (!info) {
+                resultDiv.style.display = 'block';
+                resultDiv.innerHTML = `<p style="color: #ff6666;">❌ Упс, я не нашёл гаджет с номером <strong>${input}</strong>. :(<br>Проверь номер или напиши в VK.</p>`;
+                return;
+            }
+
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <p style="color: #2ecc2e;">🎉 Ура! Я нашёл его :D!</p>
+                <p><strong>© Производитель:</strong> ${info.producer}</p>
+                <p><strong>📱 Бренд:</strong> ${info.brand}</p>
+                <p><strong>📦 Модель:</strong> ${info.model}</p>
+                <p><strong>🎨 Цвет:</strong> ${info.color}</p>
+                <p><strong>💳 Слот:</strong> ${info.sim_type}</p>
+                <p><strong>📅 Год выпуска:</strong> ${info.release_year}</p>
+                <p><strong>💰 Цена на момент покупки:</strong> ${info.price}</p>
+                <p><strong>🧍‍♂️ Покупатель:</strong> ${info.user || 'не указан'}</p>
+                <p style="margin-top: 10px; color: #4a6a4a;">-------------------------------------------------------</p>
+            `;
+        }
+
+        // === ПОИСК ПО НАЖАТИЮ ENTER ===
+        document.getElementById('serialInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                checkSerial();
+            }
         });
     </script>
 
