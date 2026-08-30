@@ -670,9 +670,9 @@
                 <div class="card" data-modal="codeModal">
                     <h3>◉ CATMOTEC CODE</h3>
                     <p>Профессиональное программирование, создание софта и разработка цифровых систем на заказ под любые задачи.</p>
-                    <p style="color: #2ecc2e;">Музыка от Евгения!</p>
-                    <p style="color: #2ecc2e;">Рисунки от Алисы и Артёма!</p>
-                    <p style="color: #2ecc2e;">Программный код от Александра и Егора!</p>
+                  <div class="badge">🎼 Музыка от Евгения!</div>
+                  <div class="badge">📃 Рисунки от Алисы и Артёма!</div>
+                    <div class="badge">💻 Программный код от Александра и Егора!</div>
                 </div>
 
                 <div class="card" data-modal="homeModal">
@@ -682,9 +682,11 @@
                     <p>➤ Брелок-телефон (iPhone 17 Pro Max)</p>
                     <p>➤ Брелок-камера (Retro 2000)</p>
                     <p>➤ Брелок-планшет (MiniPad)</p>
+                    <p>➤ БрелоКот (Cat)</p>
                     <p style="color: #ffcc00; font-weight: bold;">🔥 НОВИНКА! Брелоки-Монстрики</p>
+                    <p style="color: #9ab89a; font-size: 0.85rem;">Полный каталог спрашивай у нас в сообществе ВК!</p>
                     <div class="badge">✓ ПРОВЕРЕНО: 40°C & 1000 RPM</div>
-                    <button class="badge" style="cursor: pointer; margin-top: 10px; border-color: #66ccff; color: #66ccff;" onclick="document.getElementById('homeModal').style.display='flex'; setTimeout(() => document.getElementById('serialInput').focus(), 100);">🔍 Проверить серийный номер</button>
+                   <div class="badge">🔍 ПРОВЕРИТЬ СЕРИЙНЫЙ НОМЕР</div>
                 </div>
             </div>
         </section>
@@ -727,7 +729,7 @@
         </section>
 
         <footer>
-            <p>■ CATMOTEC © 2026 ■ КАЛИНИНГРАД / ЧЕБОКСАРЫ ■<br>ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
+            <p>■ CATMOTEC © 2026 ■ ЧЕБОКСАРЫ / КАЛИНИНГРАД ■<br>ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
             <div class="social-links">
                 <a href="#" target="_blank" data-social="youtube">[ YT ]</a>
                 <a href="#" target="_blank" data-social="telegram">[ TG ]</a>
@@ -787,7 +789,7 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО HOME С ПРОВЕРКОЙ СЕРИЙНОГО НОМЕРА -->
+    <!-- МОДАЛЬНОЕ ОКНО HOME (СРАЗУ ПРОВЕРКА СЕРИЙНОГО НОМЕРА) -->
     <div id="homeModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><span>[ CATMOTEC HOME :: ПРОВЕРКА СЕРИЙНОГО НОМЕРА ]</span><button class="modal-close">[ X ]</button></div>
@@ -874,7 +876,9 @@
             }
         }
 
-        window.addEventListener('load', createPixelRain);
+        window.addEventListener('load', () => {
+            createPixelRain();
+        });
 
         let resizeTimeout;
         window.addEventListener('resize', () => {
@@ -898,261 +902,260 @@
 
         // === БАЗА ДАННЫХ СЕРИЙНЫХ НОМЕРОВ ===
         const seria = {
-    "IE001": {
-        "producer": "Catmotec",
-        "brand": "Apple",
-        "model": "iPhone 17 Pro Max",
-        "color": "голубой",
-        "sim_type": "SIM-лоток отсутствует",
-        "release_year": "09.2025",
-        "price": "59₽",
-        "article": "BRT1",
-        "user": "Александр (Крылов)"
-    },
-    "SA001": {
-        "producer": "Catmotec",
-        "brand": "Samsung",
-        "model": "Galaxy S25 Ultra",
-        "color": "чёрный",
-        "sim_type": "SIM-лоток есть",
-        "release_year": "10.2025",
-        "price": "59₽",
-        "article": "BRT1",
-        "user": "Евгений (Крылов)"
-    },
-    "IE002": {
-        "producer": "Catmotec",
-        "brand": "Apple",
-        "model": "iPhone 17 Pro Max",
-        "color": "красный",
-        "sim_type": "SIM-лоток отсутствует",
-        "release_year": "10.2025",
-        "price": "59₽",
-        "article": "BRT1",
-        "user": "Анастасия (Александрова)"
-    },
-    "IE003": {
-        "producer": "Catmotec",
-        "brand": "Apple",
-        "model": "iPhone 17 Pro",
-        "color": "белый",
-        "sim_type": "SIM-лоток есть",
-        "release_year": "10.2025",
-        "price": "59₽",
-        "article": "BRT1",
-        "user": "Роман (Васильев)"
-    },
-    "IE004": {
-        "producer": "Catmotec",
-        "brand": "Apple",
-        "model": "iPhone 13",
-        "color": "черный",
-        "sim_type": "SIM-лоток отсутствует",
-        "release_year": "10.2025",
-        "price": "39₽",
-        "article": "BRT1",
-        "user": "Алиса (Федотова)"
-    },
-    "IE005": {
-        "producer": "Catmotec",
-        "brand": "Apple",
-        "model": "iPhone 17",
-        "color": "голубой",
-        "sim_type": "SIM-лоток есть",
-        "release_year": "11.2025",
-        "price": "49₽",
-        "article": "BRT1",
-        "user": "Нина (Михайлова)"
-    },
-    "BR002": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок (Haval)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "07.2026",
-        "price": "99₽",
-        "article": "BRZ1",
-        "user": "Сергей (Крылов)"
-    },
-    "BR003": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок (Niva)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "07.2026",
-        "price": "99₽",
-        "article": "BRZ1",
-        "user": "Сергей (Крылов)"
-    },
-    "BM001": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок-Монстрик",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "199₽",
-        "article": "BRM1",
-        "user": "Нина (Михайлова)"
-    },
-    "SE001": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок-Монстрик (деформированный)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "07.2026",
-        "price": "169₽",
-        "article": "BRM1",
-        "user": "Александр (Крылов)"
-    },
-    "SE002": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок-Монстрик (деформированный)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "07.2026",
-        "price": "169₽",
-        "article": "BRT1",
-        "user": "Евгений (Крылов)"
-    },
-    "SE003": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок-Монстрик (деформированный)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "169₽",
-        "article": "BRT1",
-        "user": "Сергей (Андропов)"
-    },
-    "SE004": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок-Монстрик (деформированный)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "169₽",
-        "article": "BRT1",
-        "user": "Макар (Спиридонов)"
-    },
-    "BR004": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "БрелоКот (Серик)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "₽",
-        "article": "BRC1",
-        "user": ""
-    },
-    "BR005": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "БрелоКот (Моня)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "₽",
-        "article": "BRC1",
-        "user": ""
-    },
-    "BR006": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "БрелоКот (Гоня)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "₽",
-        "article": "BRC1",
-        "user": ""
-    },
-    "BR007": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "БрелоКот ()",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "₽",
-        "article": "BRC1",
-        "user": ""
-    },
-    "BM002": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок-Монстрик",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "249₽",
-        "article": "BRM1",
-        "user": ""
-    },
-    "BM003": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок-Монстрик",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "249₽",
-        "article": "BRM1",
-        "user": ""
-    },
-    "BM004": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок-Монстрик",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "249₽",
-        "article": "BRM1",
-        "user": ""
-      },
-    "BM005": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок-Монстрик",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "249₽",
-        "article": "BRM1",
-        "user": "Анастасия (Александрова)"
-    },
-          
-    "BR008": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок (Niva)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "08.2026",
-        "price": "69₽",
-        "article": "BRZ1",
-        "user": "Сергей (Крылов)"
-    },
-    "BR001": {
-        "producer": "Catmotec",
-        "brand": "CMT",
-        "model": "Брелок (Toyota)",
-        "color": "Разноцветный",
-        "sim_type": "SIM-лоток отсутствует в данной версии",
-        "release_year": "06.2026",
-        "price": "69₽",
-        "article": "BRZ1",
-        "user": "Евгений (Крылов)"
-    }
-};
+            "IE001": {
+                "producer": "Catmotec",
+                "brand": "Apple",
+                "model": "iPhone 17 Pro Max",
+                "color": "голубой",
+                "sim_type": "SIM-лоток отсутствует",
+                "release_year": "09.2025",
+                "price": "59₽",
+                "article": "BRT1",
+                "user": "Александр (Крылов)"
+            },
+            "SA001": {
+                "producer": "Catmotec",
+                "brand": "Samsung",
+                "model": "Galaxy S25 Ultra",
+                "color": "чёрный",
+                "sim_type": "SIM-лоток есть",
+                "release_year": "10.2025",
+                "price": "59₽",
+                "article": "BRT1",
+                "user": "Евгений (Крылов)"
+            },
+            "IE002": {
+                "producer": "Catmotec",
+                "brand": "Apple",
+                "model": "iPhone 17 Pro Max",
+                "color": "красный",
+                "sim_type": "SIM-лоток отсутствует",
+                "release_year": "10.2025",
+                "price": "59₽",
+                "article": "BRT1",
+                "user": "Анастасия (Александрова)"
+            },
+            "IE003": {
+                "producer": "Catmotec",
+                "brand": "Apple",
+                "model": "iPhone 17 Pro",
+                "color": "белый",
+                "sim_type": "SIM-лоток есть",
+                "release_year": "10.2025",
+                "price": "59₽",
+                "article": "BRT1",
+                "user": "Роман (Васильев)"
+            },
+            "IE004": {
+                "producer": "Catmotec",
+                "brand": "Apple",
+                "model": "iPhone 13",
+                "color": "черный",
+                "sim_type": "SIM-лоток отсутствует",
+                "release_year": "10.2025",
+                "price": "39₽",
+                "article": "BRT1",
+                "user": "Алиса (Федотова)"
+            },
+            "IE005": {
+                "producer": "Catmotec",
+                "brand": "Apple",
+                "model": "iPhone 17",
+                "color": "голубой",
+                "sim_type": "SIM-лоток есть",
+                "release_year": "11.2025",
+                "price": "49₽",
+                "article": "BRT1",
+                "user": "Нина (Михайлова)"
+            },
+            "BR002": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок (Haval)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "07.2026",
+                "price": "99₽",
+                "article": "BRZ1",
+                "user": "Сергей (Крылов)"
+            },
+            "BR003": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок (Niva)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "07.2026",
+                "price": "99₽",
+                "article": "BRZ1",
+                "user": "Сергей (Крылов)"
+            },
+            "BM001": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "199₽",
+                "article": "BRM1",
+                "user": "Нина (Михайлова)"
+            },
+            "SE001": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик (деформированный)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "07.2026",
+                "price": "169₽",
+                "article": "BRM1",
+                "user": "Александр (Крылов)"
+            },
+            "SE002": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик (деформированный)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "07.2026",
+                "price": "169₽",
+                "article": "BRT1",
+                "user": "Евгений (Крылов)"
+            },
+            "SE003": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик (деформированный)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "169₽",
+                "article": "BRT1",
+                "user": "Сергей (Андропов)"
+            },
+            "SE004": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик (деформированный)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "169₽",
+                "article": "BRT1",
+                "user": "Макар (Спиридонов)"
+            },
+            "BR004": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "БрелоКот (Серик)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "₽",
+                "article": "BRC1",
+                "user": ""
+            },
+            "BR005": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "БрелоКот (Моня)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "₽",
+                "article": "BRC1",
+                "user": ""
+            },
+            "BR006": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "БрелоКот (Гоня)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "₽",
+                "article": "BRC1",
+                "user": ""
+            },
+            "BR007": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "БрелоКот ()",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "₽",
+                "article": "BRC1",
+                "user": ""
+            },
+            "BM002": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "249₽",
+                "article": "BRM1",
+                "user": ""
+            },
+            "BM003": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "249₽",
+                "article": "BRM1",
+                "user": ""
+            },
+            "BM004": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "249₽",
+                "article": "BRM1",
+                "user": ""
+              },
+            "BM005": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок-Монстрик",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "249₽",
+                "article": "BRM1",
+                "user": "Анастасия (Александрова)"
+            },
+            "BR008": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок (Niva)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "08.2026",
+                "price": "69₽",
+                "article": "BRZ1",
+                "user": "Сергей (Крылов)"
+            },
+            "BR001": {
+                "producer": "Catmotec",
+                "brand": "CMT",
+                "model": "Брелок (Toyota)",
+                "color": "Разноцветный",
+                "sim_type": "SIM-лоток отсутствует в данной версии",
+                "release_year": "06.2026",
+                "price": "69₽",
+                "article": "BRZ1",
+                "user": "Евгений (Крылов)"
+            }
+        };
 
         // === ФУНКЦИЯ ПРОВЕРКИ СЕРИЙНОГО НОМЕРА ===
         function checkSerial() {
@@ -1182,7 +1185,7 @@
                 <p><strong>💳 Слот:</strong> ${info.sim_type}</p>
                 <p><strong>📅 Год выпуска:</strong> ${info.release_year}</p>
                 <p><strong>💰 Цена на момент покупки:</strong> ${info.price}</p>
-                <p><strong>📟 Артикул товара:</strong> ${info.article}</p>
+                <p><strong>📟 Артикул товара:</strong> ${info.article || '—'}</p>
                 <p><strong>🧍‍♂️ Покупатель:</strong> ${info.user || 'не указан'}</p>
                 <p style="margin-top: 10px; color: #4a6a4a;">-------------------------------------------------------</p>
             `;
