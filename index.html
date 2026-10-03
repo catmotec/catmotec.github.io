@@ -6,651 +6,142 @@
     <title>CATMOTEC | PIXEL EDITION</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            image-rendering: crisp-edges;
-            image-rendering: pixelated;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; image-rendering: crisp-edges; image-rendering: pixelated; }
         body {
-            background-color: #0a0c0a;
-            color: #c0e0c0;
+            background-color: #0a0c0a; color: #c0e0c0;
             font-family: 'VT323', 'Courier New', monospace;
-            font-size: 20px;
-            line-height: 1.4;
-            padding: 2rem;
-            background-image:
-                linear-gradient(#0f120f 1px, transparent 1px),
-                linear-gradient(90deg, #0f120f 1px, transparent 1px);
-            background-size: 32px 32px, 32px 32px;
-            min-height: 100vh;
-            position: relative;
+            font-size: 20px; line-height: 1.4; padding: 2rem;
+            background-image: linear-gradient(#0f120f 1px, transparent 1px), linear-gradient(90deg, #0f120f 1px, transparent 1px);
+            background-size: 32px 32px, 32px 32px; min-height: 100vh; position: relative;
             -webkit-font-smoothing: none;
-            font-smoothing: never;
         }
-
-        .pixel-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: #0a0c0a;
-            overflow: hidden;
-        }
-
-        .pixel-bg::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-                linear-gradient(#0f120f 1px, transparent 1px),
-                linear-gradient(90deg, #0f120f 1px, transparent 1px);
-            background-size: 40px 40px, 40px 40px;
-            pointer-events: none;
-            opacity: 0.4;
-        }
-
-        .pixel-rain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .drop {
-            position: absolute;
-            color: #2ecc2e;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 14px;
-            text-shadow: 0 0 2px #2ecc2e;
-            opacity: 0;
-            white-space: nowrap;
-            animation: pixelFall linear infinite;
-        }
-
-        @keyframes pixelFall {
-            0% {
-                top: -5%;
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            30% {
-                opacity: 0.5;
-            }
-            70% {
-                opacity: 0.5;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                top: 105%;
-                opacity: 0;
-            }
-        }
-
-        .pixel-bg::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0,0,0,0.08) 0px,
-                rgba(0,0,0,0.08) 2px,
-                transparent 2px,
-                transparent 4px
-            );
-            pointer-events: none;
-            animation: softFlicker 3s infinite alternate;
-            z-index: -1;
-        }
-
-        @keyframes softFlicker {
-            0% { opacity: 0.4; }
-            100% { opacity: 0.7; }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .terminal-header {
-            border: 2px solid #2ecc2e;
-            padding: 1.5rem;
-            margin-bottom: 3rem;
-            background: #0a0c0a;
-        }
-
-        h1 {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 2rem;
-            font-weight: normal;
-            letter-spacing: -1px;
-            color: #2ecc2e;
-            margin-bottom: 1rem;
-            display: inline-block;
-            border-bottom: 2px dotted #2ecc2e;
-            line-height: 1.3;
-        }
-
-        .tagline {
-            font-family: 'VT323', monospace;
-            font-size: 1rem;
-            color: #6a8e6a;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 0.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin: 1.8rem 0 0 0;
-            border-top: 1px solid #2a3a2a;
-            padding-top: 1.5rem;
-        }
-
-        .nav-links a {
-            color: #8ab88a;
-            text-decoration: none;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.65rem;
-            border: 1px solid #2a3a2a;
-            padding: 0.5rem 0.8rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .nav-links a[data-nav="ecosystems"]:hover {
-            border-color: #ff6666;
-            color: #ff6666;
-            background: #ff666610;
-            box-shadow: 0 0 8px #ff666640;
-        }
-
-        .nav-links a[data-nav="history"]:hover {
-            border-color: #ffee66;
-            color: #ffee66;
-            background: #ffee6610;
-            box-shadow: 0 0 8px #ffee6640;
-        }
-
-        .nav-links a[data-nav="team"]:hover {
-            border-color: #66ff66;
-            color: #66ff66;
-            background: #66ff6610;
-            box-shadow: 0 0 8px #66ff6640;
-        }
-
-        .nav-links a[data-nav="contact"]:hover {
-            border-color: #66ccff;
-            color: #66ccff;
-            background: #66ccff10;
-            box-shadow: 0 0 8px #66ccff40;
-        }
-
-        section {
-            margin-bottom: 4rem;
-            scroll-margin-top: 80px;
-        }
-
-        h2 {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.9rem;
-            font-weight: normal;
-            border-left: 8px solid #2ecc2e;
-            padding-left: 1rem;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #8ab88a;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background: #0a0c0a;
-            border: 2px solid #2a3a2a;
-            padding: 1.2rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .card[data-modal="gamesModal"]:hover {
-            border-color: #ff6666;
-            background: #ff666610;
-            box-shadow: 0 0 8px #ff666640;
-        }
-        .card[data-modal="gamesModal"]:hover h3 {
-            color: #ff6666;
-        }
-
-        .card[data-modal="codeModal"]:hover {
-            border-color: #ffee66;
-            background: #ffee6610;
-            box-shadow: 0 0 8px #ffee6640;
-        }
-        .card[data-modal="codeModal"]:hover h3 {
-            color: #ffee66;
-        }
-
-        .card[data-modal="homeModal"]:hover {
-            border-color: #66ccff;
-            background: #66ccff10;
-            box-shadow: 0 0 8px #66ccff40;
-        }
-        .card[data-modal="homeModal"]:hover h3 {
-            color: #66ccff;
-        }
-
-        .card h3 {
-            font-family: 'Press Start 2P', monospace;
-            color: #2ecc2e;
-            font-size: 0.7rem;
-            margin-bottom: 1rem;
-            font-weight: normal;
-            text-transform: uppercase;
-            line-height: 1.4;
-            transition: color 0.2s ease;
-        }
-
-        .card p {
-            font-family: 'VT323', monospace;
-            color: #9ab89a;
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            line-height: 1.3;
-        }
-
-        .badge {
-            display: inline-block;
-            border: 1px solid #2ecc2e;
-            color: #2ecc2e;
-            padding: 0.3rem 0.6rem;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.5rem;
-            margin-top: 0.5rem;
-            text-transform: uppercase;
-            background: #0a0c0a;
-        }
-
-        .spoiler-btn {
-            display: block;
-            width: 100%;
-            background: #0a0c0a;
-            border: 2px solid #2ecc2e;
-            color: #2ecc2e;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.7rem;
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1.5rem;
-        }
-
-        .spoiler-btn:hover {
-            background: #1a2a1a;
-        }
-
-        .hidden-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .hidden-content.show {
-            max-height: 2000px;
-        }
-
-        .timeline {
-            border-left: 3px solid #2ecc2e;
-            padding-left: 2rem;
-        }
-
-        .timeline-item {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '■';
-            position: absolute;
-            left: -2.2rem;
-            top: -0.2rem;
-            color: #2ecc2e;
-            font-size: 1rem;
-        }
-
-        .timeline-year {
-            font-family: 'Press Start 2P', monospace;
-            color: #2ecc2e;
-            font-size: 0.6rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .timeline-text {
-            font-family: 'VT323', monospace;
-            color: #9ab89a;
-            font-size: 1rem;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1rem;
-        }
-
-        .member-card {
-            border: 2px solid #2a3a2a;
-            padding: 0.8rem;
-            background: #0a0c0a;
-            text-align: center;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
-
-        .member-card[data-member="alexander"]:hover {
-            border-color: #66ccff;
-            background: #66ccff10;
-            box-shadow: 0 0 8px #66ccff40;
-        }
-        .member-card[data-member="alexander"]:hover h4 {
-            color: #66ccff;
-        }
-
-        .member-card[data-member="artem"]:hover {
-            border-color: #ff6666;
-            background: #ff666610;
-            box-shadow: 0 0 8px #ff666640;
-        }
-        .member-card[data-member="artem"]:hover h4 {
-            color: #ff6666;
-        }
-
-        .member-card[data-member="alisa"]:hover {
-            border-color: #ff99cc;
-            background: #ff99cc10;
-            box-shadow: 0 0 8px #ff99cc40;
-        }
-        .member-card[data-member="alisa"]:hover h4 {
-            color: #ff99cc;
-        }
-
-        .member-card[data-member="evgeniy"]:hover {
-            border-color: #cc99ff;
-            background: #cc99ff10;
-            box-shadow: 0 0 8px #cc99ff40;
-        }
-        .member-card[data-member="evgeniy"]:hover h4 {
-            color: #cc99ff;
-        }
-
-        .member-card[data-member="egor"]:hover {
-            border-color: #66ff66;
-            background: #66ff6610;
-            box-shadow: 0 0 8px #66ff6640;
-        }
-        .member-card[data-member="egor"]:hover h4 {
-            color: #66ff66;
-        }
-
-        .member-card[data-member="sergey"]:hover {
-            border-color: #ffa500;
-            background: #ffa50010;
-            box-shadow: 0 0 8px #ffa50040;
-        }
-        .member-card[data-member="sergey"]:hover h4 {
-            color: #ffa500;
-        }
-
-        .member-card[data-member="makar"]:hover {
-            border-color: #ffd700;
-            background: #ffd70010;
-            box-shadow: 0 0 8px #ffd70040;
-        }
-        .member-card[data-member="makar"]:hover h4 {
-            color: #ffd700;
-        }
-
-        /* ПОЛИНА — ПУРПУРНЫЙ */
-        .member-card[data-member="polina"]:hover {
-            border-color: #dda0dd;
-            background: #dda0dd10;
-            box-shadow: 0 0 8px #dda0dd40;
-        }
-        .member-card[data-member="polina"]:hover h4 {
-            color: #dda0dd;
-        }
-
-        /* НИЛУФАР — БИРЮЗОВЫЙ */
-        .member-card[data-member="nilufar"]:hover {
-            border-color: #40e0d0;
-            background: #40e0d010;
-            box-shadow: 0 0 8px #40e0d040;
-        }
-        .member-card[data-member="nilufar"]:hover h4 {
-            color: #40e0d0;
-        }
-
-        .member-card h4 {
-            font-family: 'Press Start 2P', monospace;
-            color: #2ecc2e;
-            font-size: 0.6rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            transition: color 0.2s ease;
-            line-height: 1.4;
-        }
-
-        .member-card .role {
-            font-family: 'VT323', monospace;
-            color: #6a8e6a;
-            font-size: 0.8rem;
-        }
-
-        .vk-contact {
-            text-align: center;
-            padding: 2rem;
-            border: 2px solid #2a3a2a;
-            background: #0a0c0a;
-            margin-top: 1rem;
-        }
-
-        .vk-button {
-            display: inline-block;
-            background: #0a0c0a;
-            border: 2px solid #2ecc2e;
-            color: #2ecc2e;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.75rem;
-            padding: 1rem 2rem;
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .vk-button:hover {
-            background: #1a2a1a;
-        }
-
-        .vk-button::before {
-            content: "[VK] ";
-            color: #2ecc2e;
-            font-weight: bold;
-        }
-
-        .contact-note {
-            margin-top: 1rem;
-            font-family: 'VT323', monospace;
-            font-size: 0.9rem;
-            color: #4a6a4a;
-        }
-
-        footer {
-            border-top: 2px solid #2a3a2a;
-            padding-top: 2rem;
-            margin-top: 4rem;
-            text-align: center;
-        }
-
-        footer p {
-            font-family: 'VT323', monospace;
-            font-size: 0.85rem;
-            color: #4a6a4a;
-            line-height: 1.6;
-        }
-
-        .social-links {
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            color: #6a8e6a;
-            text-decoration: none;
-            margin: 0 1rem;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.6rem;
-            border: 1px solid #2a3a2a;
-            padding: 0.3rem 0.6rem;
-            display: inline-block;
-            transition: all 0.2s ease;
-        }
-
-        .social-links a[data-social="youtube"]:hover {
-            border-color: #ff6666;
-            color: #ff6666;
-            background: #ff666610;
-            box-shadow: 0 0 8px #ff666640;
-        }
-
-        .social-links a[data-social="telegram"]:hover {
-            border-color: #66ccff;
-            color: #66ccff;
-            background: #66ccff10;
-            box-shadow: 0 0 8px #66ccff40;
-        }
-
-        .social-links a[data-social="vk"]:hover {
-            border-color: #4d6aff;
-            color: #4d6aff;
-            background: #4d6aff10;
-            box-shadow: 0 0 8px #4d6aff40;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: #0a0c0a;
-            border: 3px solid #2ecc2e;
-            box-shadow: 8px 8px 0px 0px #1a3a1a;
-            max-width: 500px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            background: #0a0c0a;
-            border-bottom: 2px solid #2ecc2e;
-            padding: 0.8rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-header span {
-            font-family: 'Press Start 2P', monospace;
-            color: #2ecc2e;
-            font-size: 0.7rem;
-        }
-
-        .modal-close {
-            background: none;
-            border: 1px solid #2ecc2e;
-            color: #2ecc2e;
-            font-family: monospace;
-            font-size: 1rem;
-            cursor: pointer;
-            padding: 0.2rem 0.6rem;
-        }
-
-        .modal-close:hover {
-            background: #1a2a1a;
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-        }
-
-        .modal-body p {
-            margin-bottom: 0.8rem;
-            font-family: 'VT323', monospace;
-            font-size: 1rem;
-            color: #9ab89a;
-        }
-
-        .modal-body h4 {
-            font-family: 'Press Start 2P', monospace;
-            color: #2ecc2e;
-            font-size: 0.65rem;
-            margin: 1.2rem 0 0.5rem 0;
-            line-height: 1.4;
-        }
-
+        .pixel-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: #0a0c0a; overflow: hidden; }
+        .pixel-bg::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(#0f120f 1px, transparent 1px), linear-gradient(90deg, #0f120f 1px, transparent 1px); background-size: 40px 40px, 40px 40px; pointer-events: none; opacity: 0.4; }
+        .pixel-rain { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        .drop { position: absolute; color: #2ecc2e; font-family: 'Press Start 2P', monospace; font-size: 14px; text-shadow: 0 0 2px #2ecc2e; opacity: 0; white-space: nowrap; animation: pixelFall linear infinite; }
+        @keyframes pixelFall { 0% { top: -5%; opacity: 0; } 10% { opacity: 0.3; } 30% { opacity: 0.5; } 70% { opacity: 0.5; } 90% { opacity: 0.3; } 100% { top: 105%; opacity: 0; } }
+        .pixel-bg::after { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 2px, transparent 2px, transparent 4px); pointer-events: none; animation: softFlicker 3s infinite alternate; z-index: -1; }
+        @keyframes softFlicker { 0% { opacity: 0.4; } 100% { opacity: 0.7; } }
+        .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        .terminal-header { border: 2px solid #2ecc2e; padding: 1.5rem; margin-bottom: 3rem; background: #0a0c0a; }
+        h1 { font-family: 'Press Start 2P', monospace; font-size: 2rem; font-weight: normal; letter-spacing: -1px; color: #2ecc2e; margin-bottom: 1rem; display: inline-block; border-bottom: 2px dotted #2ecc2e; line-height: 1.3; }
+        .tagline { font-family: 'VT323', monospace; font-size: 1rem; color: #6a8e6a; text-transform: uppercase; letter-spacing: 1px; margin-top: 0.5rem; }
+        .nav-links { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.8rem 0 0 0; border-top: 1px solid #2a3a2a; padding-top: 1.5rem; }
+        .nav-links a { color: #8ab88a; text-decoration: none; font-family: 'Press Start 2P', monospace; font-size: 0.6rem; border: 1px solid #2a3a2a; padding: 0.5rem 0.8rem; transition: all 0.2s ease; cursor: pointer; }
+        .nav-links a[data-nav="ecosystems"]:hover { border-color: #ff6666; color: #ff6666; background: #ff666610; box-shadow: 0 0 8px #ff666640; }
+        .nav-links a[data-nav="services"]:hover { border-color: #cc99ff; color: #cc99ff; background: #cc99ff10; box-shadow: 0 0 8px #cc99ff40; }
+        .nav-links a[data-nav="timer"]:hover { border-color: #40e0d0; color: #40e0d0; background: #40e0d010; box-shadow: 0 0 8px #40e0d040; }
+        .nav-links a[data-nav="gallery"]:hover { border-color: #ff99cc; color: #ff99cc; background: #ff99cc10; box-shadow: 0 0 8px #ff99cc40; }
+        .nav-links a[data-nav="reviews"]:hover { border-color: #ffd700; color: #ffd700; background: #ffd70010; box-shadow: 0 0 8px #ffd70040; }
+        .nav-links a[data-nav="logos"]:hover { border-color: #ffd700; color: #ffd700; background: #ffd70010; box-shadow: 0 0 8px #ffd70040; }
+        .nav-links a[data-nav="history"]:hover { border-color: #ffee66; color: #ffee66; background: #ffee6610; box-shadow: 0 0 8px #ffee6640; }
+        .nav-links a[data-nav="team"]:hover { border-color: #66ff66; color: #66ff66; background: #66ff6610; box-shadow: 0 0 8px #66ff6640; }
+        .nav-links a[data-nav="contact"]:hover { border-color: #66ccff; color: #66ccff; background: #66ccff10; box-shadow: 0 0 8px #66ccff40; }
+        section { margin-bottom: 4rem; scroll-margin-top: 80px; }
+        h2 { font-family: 'Press Start 2P', monospace; font-size: 0.9rem; font-weight: normal; border-left: 8px solid #2ecc2e; padding-left: 1rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 1px; color: #8ab88a; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .card { background: #0a0c0a; border: 2px solid #2a3a2a; padding: 1.2rem; transition: all 0.2s ease; cursor: pointer; }
+        .card[data-modal="gamesModal"]:hover { border-color: #ff6666; background: #ff666610; box-shadow: 0 0 8px #ff666640; } .card[data-modal="gamesModal"]:hover h3 { color: #ff6666; }
+        .card[data-modal="codeModal"]:hover { border-color: #ffee66; background: #ffee6610; box-shadow: 0 0 8px #ffee6640; } .card[data-modal="codeModal"]:hover h3 { color: #ffee66; }
+        .card[data-modal="homeModal"]:hover { border-color: #66ccff; background: #66ccff10; box-shadow: 0 0 8px #66ccff40; } .card[data-modal="homeModal"]:hover h3 { color: #66ccff; }
+        .card[data-modal="polinaService"]:hover { border-color: #dda0dd; background: #dda0dd10; box-shadow: 0 0 8px #dda0dd40; } .card[data-modal="polinaService"]:hover h3 { color: #dda0dd; }
+        .card[data-modal="brelkiService"]:hover { border-color: #66ccff; background: #66ccff10; box-shadow: 0 0 8px #66ccff40; } .card[data-modal="brelkiService"]:hover h3 { color: #66ccff; }
+        .card[data-modal="codeService"]:hover { border-color: #66ff66; background: #66ff6610; box-shadow: 0 0 8px #66ff6640; } .card[data-modal="codeService"]:hover h3 { color: #66ff66; }
+        .card[data-modal="artService"]:hover { border-color: #ff99cc; background: #ff99cc10; box-shadow: 0 0 8px #ff99cc40; } .card[data-modal="artService"]:hover h3 { color: #ff99cc; }
+        .card[data-modal="montageService"]:hover { border-color: #ffa500; background: #ffa50010; box-shadow: 0 0 8px #ffa50040; } .card[data-modal="montageService"]:hover h3 { color: #ffa500; }
+        .card[data-modal="nilufarService"]:hover { border-color: #40e0d0; background: #40e0d010; box-shadow: 0 0 8px #40e0d040; } .card[data-modal="nilufarService"]:hover h3 { color: #40e0d0; }
+        .card[data-modal="evgeniyService"]:hover { border-color: #cc99ff; background: #cc99ff10; box-shadow: 0 0 8px #cc99ff40; } .card[data-modal="evgeniyService"]:hover h3 { color: #cc99ff; }
+        .card h3 { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 0.7rem; margin-bottom: 1rem; font-weight: normal; text-transform: uppercase; line-height: 1.4; transition: color 0.2s ease; }
+        .card p { font-family: 'VT323', monospace; color: #9ab89a; font-size: 1rem; margin-bottom: 0.5rem; line-height: 1.3; }
+        .badge { display: inline-block; border: 1px solid #2ecc2e; color: #2ecc2e; padding: 0.3rem 0.6rem; font-family: 'Press Start 2P', monospace; font-size: 0.5rem; margin-top: 0.5rem; text-transform: uppercase; background: #0a0c0a; }
+        .spoiler-btn { display: block; width: 100%; background: #0a0c0a; border: 2px solid #2ecc2e; color: #2ecc2e; font-family: 'Press Start 2P', monospace; font-size: 0.7rem; padding: 1rem; text-align: center; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.5rem; }
+        .spoiler-btn:hover { background: #1a2a1a; }
+        .hidden-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+        .hidden-content.show { max-height: 2000px; }
+        .timeline { border-left: 3px solid #2ecc2e; padding-left: 2rem; }
+        .timeline-item { margin-bottom: 2rem; position: relative; }
+        .timeline-item::before { content: '■'; position: absolute; left: -2.2rem; top: -0.2rem; color: #2ecc2e; font-size: 1rem; }
+        .timeline-year { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 0.6rem; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .timeline-text { font-family: 'VT323', monospace; color: #9ab89a; font-size: 1rem; }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+        .member-card { border: 2px solid #2a3a2a; padding: 0.8rem; background: #0a0c0a; text-align: center; transition: all 0.2s ease; cursor: pointer; }
+        .member-card[data-member="alexander"]:hover { border-color: #66ccff; background: #66ccff10; box-shadow: 0 0 8px #66ccff40; } .member-card[data-member="alexander"]:hover h4 { color: #66ccff; }
+        .member-card[data-member="artem"]:hover { border-color: #ff6666; background: #ff666610; box-shadow: 0 0 8px #ff666640; } .member-card[data-member="artem"]:hover h4 { color: #ff6666; }
+        .member-card[data-member="alisa"]:hover { border-color: #ff99cc; background: #ff99cc10; box-shadow: 0 0 8px #ff99cc40; } .member-card[data-member="alisa"]:hover h4 { color: #ff99cc; }
+        .member-card[data-member="evgeniy"]:hover { border-color: #cc99ff; background: #cc99ff10; box-shadow: 0 0 8px #cc99ff40; } .member-card[data-member="evgeniy"]:hover h4 { color: #cc99ff; }
+        .member-card[data-member="egor"]:hover { border-color: #66ff66; background: #66ff6610; box-shadow: 0 0 8px #66ff6640; } .member-card[data-member="egor"]:hover h4 { color: #66ff66; }
+        .member-card[data-member="sergey"]:hover { border-color: #ffa500; background: #ffa50010; box-shadow: 0 0 8px #ffa50040; } .member-card[data-member="sergey"]:hover h4 { color: #ffa500; }
+        .member-card[data-member="makar"]:hover { border-color: #ffd700; background: #ffd70010; box-shadow: 0 0 8px #ffd70040; } .member-card[data-member="makar"]:hover h4 { color: #ffd700; }
+        .member-card[data-member="polina"]:hover { border-color: #dda0dd; background: #dda0dd10; box-shadow: 0 0 8px #dda0dd40; } .member-card[data-member="polina"]:hover h4 { color: #dda0dd; }
+        .member-card[data-member="nilufar"]:hover { border-color: #40e0d0; background: #40e0d010; box-shadow: 0 0 8px #40e0d040; } .member-card[data-member="nilufar"]:hover h4 { color: #40e0d0; }
+        .member-card h4 { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 0.6rem; margin-bottom: 0.5rem; text-transform: uppercase; transition: color 0.2s ease; line-height: 1.4; }
+        .member-card .role { font-family: 'VT323', monospace; color: #6a8e6a; font-size: 0.8rem; }
+        .timer-box { border: 3px solid #2ecc2e; padding: 2rem; text-align: center; background: #0a0c0a; margin-bottom: 2rem; }
+        .timer-box h3 { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .timer-grid { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+        .timer-unit { border: 2px solid #2a3a2a; padding: 1rem 1.5rem; background: #0e120e; min-width: 100px; }
+        .timer-num { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 1.8rem; display: block; margin-bottom: 0.5rem; }
+        .timer-label { font-family: 'VT323', monospace; color: #6a8e6a; font-size: 0.9rem; text-transform: uppercase; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+        .gallery-item { border: 2px solid #2a3a2a; background: #0e120e; padding: 0.5rem; text-align: center; transition: all 0.2s ease; cursor: pointer; }
+        .gallery-item:hover { border-color: #2ecc2e; background: #1a2a1a; box-shadow: 0 0 8px #2ecc2e40; }
+        .gallery-item img { width: 100%; height: 150px; object-fit: cover; image-rendering: pixelated; border: 1px solid #2a3a2a; margin-bottom: 0.5rem; }
+        .gallery-item .caption { font-family: 'VT323', monospace; color: #9ab89a; font-size: 0.9rem; }
+        .logos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
+        .logo-card { border: 2px solid #2a3a2a; background: #0e120e; padding: 1rem; text-align: center; transition: all 0.2s ease; cursor: pointer; }
+        .logo-card:hover { border-color: #2ecc2e; background: #1a2a1a; box-shadow: 0 0 8px #2ecc2e40; transform: scale(1.03); }
+        .logo-card img { width: 100%; height: 160px; object-fit: contain; image-rendering: pixelated; margin: 0.5rem 0; }
+        .logo-year { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 0.65rem; margin-bottom: 0.5rem; }
+        .logo-name { font-family: 'Press Start 2P', monospace; color: #c0e0c0; font-size: 0.6rem; margin-top: 0.5rem; }
+        .logo-desc { font-family: 'VT323', monospace; color: #6a8e6a; font-size: 0.85rem; margin-top: 0.5rem; }
+        .review-card { border: 2px solid #2a3a2a; background: #0e120e; padding: 1.2rem; margin-bottom: 1rem; }
+        .review-card:hover { border-color: #ffd700; box-shadow: 0 0 8px #ffd70040; }
+        .review-stars { color: #ffd700; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .review-text { font-family: 'VT323', monospace; color: #c0e0c0; font-size: 1rem; margin-bottom: 0.5rem; font-style: italic; }
+        .review-author { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 0.5rem; text-transform: uppercase; }
+        .review-form-box { border: 3px solid #2ecc2e; padding: 1.5rem; margin-top: 2rem; background: #0a0c0a; }
+        .review-form-box h3 { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 0.8rem; margin-bottom: 1rem; }
+        .review-form-box label { display: block; font-family: 'VT323', monospace; color: #c0e0c0; font-size: 1rem; margin-bottom: 0.3rem; margin-top: 1rem; }
+        .review-form-box input, .review-form-box select, .review-form-box textarea { width: 100%; background: #0a0c0a; border: 2px solid #2a3a2a; color: #2ecc2e; padding: 10px; font-family: 'VT323', monospace; font-size: 1rem; outline: none; }
+        .review-form-box textarea { min-height: 100px; resize: vertical; }
+        .review-form-box input:focus, .review-form-box select:focus, .review-form-box textarea:focus { border-color: #2ecc2e; box-shadow: 0 0 8px #2ecc2e40; }
+        .vk-contact { text-align: center; padding: 2rem; border: 2px solid #2a3a2a; background: #0a0c0a; margin-top: 1rem; }
+        .vk-button { display: inline-block; background: #0a0c0a; border: 2px solid #2ecc2e; color: #2ecc2e; font-family: 'Press Start 2P', monospace; font-size: 0.75rem; padding: 1rem 2rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+        .vk-button:hover { background: #1a2a1a; }
+        .vk-button::before { content: "[VK] "; color: #2ecc2e; font-weight: bold; }
+        .contact-note { margin-top: 1rem; font-family: 'VT323', monospace; font-size: 0.9rem; color: #4a6a4a; }
+        footer { border-top: 2px solid #2a3a2a; padding-top: 2rem; margin-top: 4rem; text-align: center; }
+        footer p { font-family: 'VT323', monospace; font-size: 0.85rem; color: #4a6a4a; line-height: 1.6; }
+        .social-links { margin-top: 1rem; }
+        .social-links a { color: #6a8e6a; text-decoration: none; margin: 0 1rem; font-family: 'Press Start 2P', monospace; font-size: 0.6rem; border: 1px solid #2a3a2a; padding: 0.3rem 0.6rem; display: inline-block; transition: all 0.2s ease; }
+        .social-links a[data-social="youtube"]:hover { border-color: #ff6666; color: #ff6666; background: #ff666610; box-shadow: 0 0 8px #ff666640; }
+        .social-links a[data-social="telegram"]:hover { border-color: #66ccff; color: #66ccff; background: #66ccff10; box-shadow: 0 0 8px #66ccff40; }
+        .social-links a[data-social="vk"]:hover { border-color: #4d6aff; color: #4d6aff; background: #4d6aff10; box-shadow: 0 0 8px #4d6aff40; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: #0a0c0a; border: 3px solid #2ecc2e; box-shadow: 8px 8px 0px 0px #1a3a1a; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto; }
+        .modal-header { background: #0a0c0a; border-bottom: 2px solid #2ecc2e; padding: 0.8rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .modal-header span { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 0.7rem; }
+        .modal-close { background: none; border: 1px solid #2ecc2e; color: #2ecc2e; font-family: monospace; font-size: 1rem; cursor: pointer; padding: 0.2rem 0.6rem; }
+        .modal-close:hover { background: #1a2a1a; }
+        .modal-body { padding: 1.5rem; }
+        .modal-body p { margin-bottom: 0.8rem; font-family: 'VT323', monospace; font-size: 1rem; color: #9ab89a; }
+        .modal-body h4 { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 0.65rem; margin: 1.2rem 0 0.5rem 0; line-height: 1.4; }
+        .music-player { position: fixed; bottom: 20px; right: 20px; background: #0a0c0a; border: 2px solid #2ecc2e; padding: 0.8rem 1.2rem; z-index: 999; display: flex; align-items: center; gap: 0.8rem; box-shadow: 4px 4px 0px 0px #1a3a1a; transition: all 0.2s ease; }
+        .music-player:hover { box-shadow: 2px 2px 0px 0px #2ecc2e; }
+        .music-btn { background: #0a0c0a; border: 2px solid #2ecc2e; color: #2ecc2e; font-family: 'Press Start 2P', monospace; font-size: 0.8rem; padding: 0.5rem 0.8rem; cursor: pointer; transition: all 0.2s ease; }
+        .music-btn:hover { background: #1a2a1a; box-shadow: 0 0 8px #2ecc2e40; }
+        .music-btn.playing { background: #1a3a1a; box-shadow: 0 0 8px #2ecc2e80; }
+        .music-label { font-family: 'Press Start 2P', monospace; color: #2ecc2e; font-size: 0.55rem; }
         @media (max-width: 700px) {
-            body {
-                padding: 1rem;
-            }
-            h1 {
-                font-size: 1.2rem;
-            }
-            .nav-links a {
-                font-size: 0.45rem;
-                padding: 0.3rem 0.5rem;
-            }
-            .vk-button {
-                font-size: 0.55rem;
-                padding: 0.8rem 1rem;
-            }
-            .modal-content {
-                width: 95%;
-            }
+            body { padding: 1rem; }
+            h1 { font-size: 1.2rem; }
+            .nav-links a { font-size: 0.45rem; padding: 0.3rem 0.5rem; }
+            .vk-button { font-size: 0.55rem; padding: 0.8rem 1rem; }
+            .modal-content { width: 95%; }
+            .timer-num { font-size: 1.2rem; }
+            .timer-unit { min-width: 70px; padding: 0.8rem; }
+            .music-player { bottom: 10px; right: 10px; padding: 0.5rem 0.8rem; }
+            .music-label { font-size: 0.45rem; }
         }
     </style>
 </head>
@@ -667,6 +158,11 @@
             <div class="tagline">[ ИННОВАЦИЯ ] [ ГЕЙМДЕВ ] [ ПИКСЕЛЬНАЯ ЭСТЕТИКА ]</div>
             <div class="nav-links">
                 <a href="#" data-nav="ecosystems">[ ЭКОСИСТЕМЫ ]</a>
+                <a href="#" data-nav="services">[ УСЛУГИ ]</a>
+                <a href="#" data-nav="timer">[ РЕЛИЗ ]</a>
+                <a href="#" data-nav="gallery">[ ГАЛЕРЕЯ ]</a>
+                <a href="#" data-nav="reviews">[ ОТЗЫВЫ ]</a>
+                <a href="#" data-nav="logos">[ ЛОГОТИПЫ ]</a>
                 <a href="#" data-nav="history">[ ИСТОРИЯ ]</a>
                 <a href="#" data-nav="team">[ КОМАНДА ]</a>
                 <a href="#" data-nav="contact">[ КОНТАКТЫ ]</a>
@@ -678,15 +174,11 @@
             <div class="grid">
                 <div class="card" data-modal="gamesModal">
                     <h3>◉ CATMOTEC GAMES</h3>
-                    <p><strong>Франшиза «Мир Котов»</strong><br>
-                    Узнавай сюжет из наших публикаций: комиксы, видео и многое другое!</p>
-                    <p><strong>«Паскаль и тайна цифрового леса»</strong><br>
-                    — пиксельная RPG-головоломка. Спаси Цифровой лес от вируса, найди три Печати и встреть загадочных существ!</p>
-                    <p><strong>«Сумасшедшая больница»</strong><br>
-                    — хоррор в пиксельной графике. Каскадёр пытается сбежать из заброшенной больницы от сумасшедшего мед-состава.</p>
+                    <p><strong>Франшиза «Мир Котов»</strong><br>Узнавай сюжет из наших публикаций: комиксы, видео и многое другое!</p>
+                    <p><strong>«Паскаль и тайна цифрового леса»</strong><br>— пиксельная RPG-головоломка. Спаси Цифровой лес от вируса, найди три Печати и встреть загадочных существ!</p>
+                    <p><strong>«Сумасшедшая больница»</strong><br>— хоррор в пиксельной графике. Каскадёр пытается сбежать из заброшенной больницы от сумасшедшего мед-состава.</p>
                     <div class="badge">▸ В РАЗРАБОТКЕ</div>
                 </div>
-
                 <div class="card" data-modal="codeModal">
                     <h3>◉ CATMOTEC CODE</h3>
                     <p>Профессиональное программирование, создание софта и разработка цифровых систем на заказ под любые задачи.</p>
@@ -694,10 +186,9 @@
                     <div class="badge">📃 Рисунки от Алисы и Артёма!</div>
                     <div class="badge">💻 Программный код от Александра и Егора!</div>
                 </div>
-
                 <div class="card" data-modal="homeModal">
                     <h3>◉ CATMOTEC HOME</h3>
-                    <p><strong>Брелки на заказ</strong> — ручная работа, выжигание по дереву.</p>
+                    <p><strong>Брелки и бисероплетные изделия на заказ</strong> — ручная работа.</p>
                     <p>📱 <strong>Каталог:</strong></p>
                     <p>➤ Брелок-телефон (iPhone 17 Pro Max)</p>
                     <p>➤ Брелок-камера (Retro 2000)</p>
@@ -711,14 +202,179 @@
             </div>
         </section>
 
+        <section id="services">
+            <h2>// УСЛУГИ</h2>
+            <div class="grid">
+                <div class="card" data-modal="polinaService">
+                    <h3>◉ БИСЕРОПЛЕТЕНИЕ</h3>
+                    <p><strong>Мастер: Полина</strong></p>
+                    <p>Кольца, браслеты, фигурки, чокеры — всё из бисера под ваш запрос.</p>
+                    <div class="badge">🎨 РУЧНАЯ РАБОТА</div>
+                </div>
+                <div class="card" data-modal="brelkiService">
+                    <h3>◉ БРЕЛКИ НА ЗАКАЗ</h3>
+                    <p><strong>Мастера: Александр, Сергей, Макар</strong></p>
+                    <p>Индивидуальный дизайн: телефоны, камеры, планшеты, коты и монстрики.</p>
+                    <div class="badge">🪵 ВЫЖИГАНИЕ ПО ДЕРЕВУ</div>
+                </div>
+                <div class="card" data-modal="codeService">
+                    <h3>◉ ПРОГРАММИРОВАНИЕ</h3>
+                    <p><strong>Мастера: Александр, Егор</strong></p>
+                    <p>Разработка игр, софта и цифровых систем на заказ.</p>
+                    <div class="badge">💻 КОД</div>
+                </div>
+                <div class="card" data-modal="artService">
+                    <h3>◉ РИСУНКИ И АРТЫ</h3>
+                    <p><strong>Художники: Алиса, Артём</strong></p>
+                    <p>Пиксельная графика, концепт-арт, иллюстрации для игр и проектов.</p>
+                    <div class="badge">🎨 АРТ</div>
+                </div>
+                <div class="card" data-modal="montageService">
+                    <h3>◉ МОНТАЖ ВИДЕО</h3>
+                    <p><strong>Мастер: Сергей</strong></p>
+                    <p>Монтаж роликов, трейлеров, клипов для игр и соцсетей.</p>
+                    <div class="badge">🎬 ВИДЕО</div>
+                </div>
+                <div class="card" data-modal="nilufarService">
+                    <h3>◉ ИСТОРИИ И СЦЕНАРИИ</h3>
+                    <p><strong>Автор: Нилуфар</strong></p>
+                    <p>Написание лора, сценариев, историй для игр и комиксов.</p>
+                    <div class="badge">✍️ ТЕКСТЫ</div>
+                </div>
+                <div class="card" data-modal="evgeniyService">
+                    <h3>◉ МУЗЫКА НА ЗАКАЗ</h3>
+                    <p><strong>Композитор: Евгений</strong></p>
+                    <p>Чиптюн, lo-fi, synthwave — саундтреки для игр и видео.</p>
+                    <div class="badge">🎼 МУЗЫКА</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="timer">
+            <h2>// ДО РЕЛИЗА «ПАСКАЛЬ И ТАЙНА ЦИФРОВОГО ЛЕСА»</h2>
+            <div class="timer-box">
+                <h3>🌿 1 ИЮЛЯ 2035 🌿</h3>
+                <div class="timer-grid">
+                    <div class="timer-unit"><span class="timer-num" id="days">00</span><span class="timer-label">Дней</span></div>
+                    <div class="timer-unit"><span class="timer-num" id="hours">00</span><span class="timer-label">Часов</span></div>
+                    <div class="timer-unit"><span class="timer-num" id="minutes">00</span><span class="timer-label">Минут</span></div>
+                    <div class="timer-unit"><span class="timer-num" id="seconds">00</span><span class="timer-label">Секунд</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery">
+            <h2>// ГАЛЕРЕЯ РАБОТ</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openGallery('брелоки.catmotec.webp', 'Брелоки-Коты')">
+                    <img src="брелоки.catmotec.webp" alt="Брелоки-Коты">
+                    <div class="caption">🪵 Брелоки-Коты</div>
+                </div>
+                <div class="gallery-item" onclick="openGallery('брелок-монстрик.catmotec.webp', 'Брелок-Монстрик')">
+                    <img src="брелок-монстрик.catmotec.webp" alt="Брелок-Монстрик">
+                    <div class="caption">👹 Брелок-Монстрик</div>
+                </div>
+                <div class="gallery-item" onclick="openGallery('брелоки-монстрики.catmotec.webp', 'Монстрики на природе')">
+                    <img src="брелоки-монстрики.catmotec.webp" alt="Монстрики на природе">
+                    <div class="caption">🌿 Монстрики на природе</div>
+                </div>
+            </div>
+            <p style="margin-top: 1rem; color: #4a6a4a; font-size: 0.9rem;">💡 Хочешь свою работу в галерее? Присылай фото в VK!</p>
+        </section>
+
+        <section id="reviews">
+            <h2>// ОТЗЫВЫ ПОКУПАТЕЛЕЙ</h2>
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <div class="review-text">«Монстрик просто супер! Держу на ключах уже месяц — не стёрся!»</div>
+                <div class="review-author">— Нина М.</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <div class="review-text">«Качество на высоте, взял ещё один в подарок. Спасибо!»</div>
+                <div class="review-author">— Сергей К.</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                <div class="review-text">«Брелок-телефон — это что-то! Все друзья спрашивают, где взял.»</div>
+                <div class="review-author">— Анастасия А.</div>
+            </div>
+            <div class="review-form-box">
+                <h3>📝 ОСТАВИТЬ ОТЗЫВ</h3>
+                <p style="color: #9ab89a; margin-bottom: 1rem;">Заполни форму — и мы опубликуем отзыв на сайте!</p>
+                <label>Ваше имя:</label>
+                <input type="text" id="reviewName" placeholder="Например: Нина">
+                <label>Оценка:</label>
+                <select id="reviewRating">
+                    <option value="5">⭐⭐⭐⭐⭐ Отлично</option>
+                    <option value="4">⭐⭐⭐⭐ Хорошо</option>
+                    <option value="3">⭐⭐⭐ Нормально</option>
+                    <option value="2">⭐⭐ Плохо</option>
+                    <option value="1">⭐ Ужасно</option>
+                </select>
+                <label>Ваш отзыв:</label>
+                <textarea id="reviewText" placeholder="Напиши, что понравилось..."></textarea>
+                <button onclick="sendReview()" class="vk-button" style="margin-top: 1rem;">ОТПРАВИТЬ В VK</button>
+            </div>
+        </section>
+
+        <section id="logos">
+            <h2>// ИСТОРИЯ ЛОГОТИПОВ</h2>
+            <div class="logos-grid">
+                <div class="logo-card">
+                    <div class="logo-year">[2021]</div>
+                    <div class="logo-placeholder" style="display:flex; align-items:center; justify-content:center; height:160px; font-family:'Press Start 2P', monospace; color:#4a6a4a; font-size:2rem;">?</div>
+                    <div class="logo-name">ИГРЫ 7 ДРУЗЕЙ</div>
+                    <div class="logo-desc">Первое название. Логотип не сохранился.</div>
+                </div>
+                <div class="logo-card">
+                    <div class="logo-year">[2022]</div>
+                    <img src="logo-2022.jpg" alt="А6">
+                    <div class="logo-name">А6</div>
+                    <div class="logo-desc">Первый комикс, нарисованный вручную</div>
+                </div>
+                <div class="logo-card">
+                    <div class="logo-year">[2023]</div>
+                    <img src="logo-2023.jpg" alt="Super Game">
+                    <div class="logo-name">SUPER GAME</div>
+                    <div class="logo-desc">Радужный период, эксперименты с цветом</div>
+                </div>
+                <div class="logo-card">
+                    <div class="logo-year">[2024]</div>
+                    <img src="logo-2024-1.jpg" alt="ProgrammCat v1">
+                    <div class="logo-name">PROGRAMMCAT</div>
+                    <div class="logo-desc">Первая версия авы</div>
+                </div>
+                <div class="logo-card">
+                    <div class="logo-year">[2024]</div>
+                    <img src="logo-2024-2.jpg" alt="ProgrammCat v2">
+                    <div class="logo-name">PROGRAMMCAT</div>
+                    <div class="logo-desc">Обновлённая версия авы</div>
+                </div>
+                <div class="logo-card">
+                    <div class="logo-year">[2025]</div>
+                    <img src="logo-2025.jpeg" alt="Pixel Cat Studios">
+                    <div class="logo-name">PIXEL CAT STUDIOS</div>
+                    <div class="logo-desc">Переход к пиксельной эстетике</div>
+                </div>
+                <div class="logo-card">
+                    <div class="logo-year">[2026]</div>
+                    <div class="logo-placeholder" style="display:flex; align-items:center; justify-content:center; height:160px; font-family:'Press Start 2P', monospace; color:#2ecc2e; font-size:1rem;">CATMOTEC</div>
+                    <div class="logo-name">CATMOTEC</div>
+                    <div class="logo-desc">Текущая экосистема — игры, код, брелки</div>
+                </div>
+            </div>
+            <p style="margin-top: 1rem; color: #4a6a4a; font-size: 0.9rem;">💡 Логотип 2021 ищем. Если найдёшь — присылай в VK!</p>
+        </section>
+
         <section id="history">
             <h2>// ИСТОРИЯ СОЗДАНИЯ</h2>
             <button class="spoiler-btn" id="historyBtn">[ ▼ РАСКРЫТЬ ИСТОРИЮ СТУДИИ ▼ ]</button>
             <div id="historyContent" class="hidden-content">
                 <div class="timeline">
                     <div class="timeline-item"><div class="timeline-year">[2020]</div><div class="timeline-text">Основание концепции. В Новочебоксарске создаётся первая идея игры «Битва».</div></div>
-                    <div class="timeline-item"><div class="timeline-year">[2021]</div><div class="timeline-text">Первый показ друзьям. Рождается идея переделать сюжет под мир котов.</div></div>
-                    <div class="timeline-item"><div class="timeline-year">[2022]</div><div class="timeline-text">Первый релиз. Формируется костяк котов: Гоня, Моня, Маня и Серик.</div></div>
+                    <div class="timeline-item"><div class="timeline-year">[2021]</div><div class="timeline-text">Первый показ друзьям. Рождается идея переделать сюжет под мир котов. Студия получает название «Игры 7 друзей».</div></div>
+                    <div class="timeline-item"><div class="timeline-year">[2022]</div><div class="timeline-text">Студия называется «А6». Первый комикс, нарисованный вручную. Формируется костяк котов: Гоня, Моня, Маня и Серик.</div></div>
                     <div class="timeline-item"><div class="timeline-year">[2023]</div><div class="timeline-text">Выходят первые комиксы. Студия меняет имя на «Super Game».</div></div>
                     <div class="timeline-item"><div class="timeline-year">[2024]</div><div class="timeline-text">Мир котов в Minecraft. Студия переименовывается в «ProgrammCat».</div></div>
                     <div class="timeline-item"><div class="timeline-year">[2025]</div><div class="timeline-text">Ребрендинг в «Pixel Cat Studios». Выходит книга «Кто такие кошки».</div></div>
@@ -736,7 +392,7 @@
                 <div class="member-card" data-member="alisa"><h4>АЛИСА</h4><div class="role">ХУДОЖНИК / ДИЗАЙНЕР</div></div>
                 <div class="member-card" data-member="artem"><h4>АРТЁМ</h4><div class="role">ХУДОЖНИК / ДИЗАЙНЕР</div></div>
                 <div class="member-card" data-member="sergey"><h4>СЕРГЕЙ</h4><div class="role">ФАСОВЩИК / МОНТАЖЕР</div></div>
-                <div class="member-card" data-member="makar"><h4>МАКАР</h4><div class="role">ПРОИЗВОДИТЕЛЬ БРЕЛКОВ</div></div>
+                <div class="member-card" data-member="makar"><h4>МАКАР</h4><div class="role">МАСТЕР БРЕЛКОВ</div></div>
                 <div class="member-card" data-member="polina"><h4>ПОЛИНА</h4><div class="role">МАСТЕР БИСЕРОПЛЕТЕНИЯ</div></div>
                 <div class="member-card" data-member="nilufar"><h4>НИЛУФАР</h4><div class="role">СЦЕНАРИСТ / АВТОР ИСТОРИЙ</div></div>
             </div>
@@ -751,7 +407,7 @@
         </section>
 
         <footer>
-            <p>■ CATMOTEC © 2026 ■ ЧЕБОКСАРЫ / КАЛИНИНГРАД ■<br>ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
+            <p>■ CATMOTEC © 2026 ■ ЧЕБОКСАРЫ ■<br>ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
             <div class="social-links">
                 <a href="#" target="_blank" data-social="youtube">[ YT ]</a>
                 <a href="#" target="_blank" data-social="telegram">[ TG ]</a>
@@ -760,44 +416,33 @@
         </footer>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО GAMES -->
+    <!-- МУЗЫКАЛЬНЫЙ ПЛЕЕР -->
+    <div class="music-player">
+        <button class="music-btn" id="musicToggle" onclick="toggleMusic()">▶</button>
+        <span class="music-label">♪ CLASSIC</span>
+    </div>
+    <audio id="bgMusic" loop>
+        <source src="classic.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- МОДАЛЬНЫЕ ОКНА -->
     <div id="gamesModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><span>[ CATMOTEC GAMES ]</span><button class="modal-close">[ X ]</button></div>
             <div class="modal-body">
-
                 <h4>🎮 ФРАНШИЗА «МИР КОТОВ»</h4>
                 <p>Узнавай сюжет из наших публикаций: комиксы, видео и многое другое!</p>
-
                 <h4>🌿 «ПАСКАЛЬ И ТАЙНА ЦИФРОВОГО ЛЕСА»</h4>
-                <p><strong>Для главной страницы:</strong><br>
-                Пиксельная RPG-головоломка, где дети учатся программированию через игру. Спаси Цифровой лес от вируса и найди три Печати создателей!</p>
-
-                <p><strong>Об игре:</strong><br>
-                Исследуйте мир, решайте логические головоломки и встречайте загадочных существ. Три финала, семь персонажей и четыре акта в пиксельной атмосфере ждут тебя!</p>
-
-                <p><strong>Ключевые персонажи:</strong><br>
-                ➤ Паскаль — юный исследователь<br>
-                ➤ Лиана — дух леса<br>
-                ➤ Фикс — филин-программист<br>
-                ➤ Глюк — дух ошибок<br>
-                ➤ Баг — бывший ИИ-помощник<br>
-                ➤ Корруптор — главный враг</p>
-
-                <p><strong>Скачать / Играть:</strong><br>
-                Попробуй первый билд на itch.io!<br>
-                <a href="#" style="color: #2ecc2e; text-decoration: underline;">[Ссылка на вашу страницу itch.io]</a></p>
-
+                <p>Пиксельная RPG-головоломка, где дети учатся программированию через игру. Спаси Цифровой лес от вируса и найди три Печати создателей!</p>
+                <p>Исследуйте мир, решайте логические головоломки и встречайте загадочных существ. Три финала, семь персонажей и четыре акта в пиксельной атмосфере ждут тебя!</p>
+                <p><strong>Ключевые персонажи:</strong><br>➤ Паскаль, Лиана, Фикс, Глюк, Баг, Корруптор</p>
                 <h4>🏥 «СУМАСШЕДШАЯ БОЛЬНИЦА»</h4>
-                <p>Хоррор-игра в пиксельной графике. Каскадёр попадает в заброшенную больницу и пытается сбежать от сумасшедшего мед-состава.</p>
-
-                <p style="margin-top: 1rem; color: #2ecc2e;">[ В РАЗРАБОТКЕ ]</p>
-
+                <p>Хоррор в пиксельной графике. Каскадёр пытается сбежать из заброшенной больницы от сумасшедшего мед-состава.</p>
+                <p style="color: #2ecc2e;">[ В РАЗРАБОТКЕ ]</p>
             </div>
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО CODE -->
     <div id="codeModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><span>[ CATMOTEC CODE ]</span><button class="modal-close">[ X ]</button></div>
@@ -811,76 +456,98 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО HOME (ПРОВЕРКА СЕРИЙНОГО НОМЕРА) -->
     <div id="homeModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header"><span>[ CATMOTEC HOME :: ПРОВЕРКА СЕРИЙНОГО НОМЕРА ]</span><button class="modal-close">[ X ]</button></div>
+            <div class="modal-header"><span>[ CATMOTEC HOME :: ПРОВЕРКА SN ]</span><button class="modal-close">[ X ]</button></div>
             <div class="modal-body">
-                <p>📦 Введи серийный номер своего брелка или гаджета Catmotec!</p>
+                <p>📦 Введи серийный номер брелка или гаджета Catmotec!</p>
                 <div style="display: flex; gap: 10px; margin: 15px 0; flex-wrap: wrap;">
-                    <input type="text" id="serialInput" placeholder="Например: IE001" style="flex: 1; min-width: 150px; background: #0a0c0a; border: 2px solid #2a3a2a; color: #2ecc2e; padding: 10px; font-family: 'VT323', monospace; font-size: 1rem; outline: none; image-rendering: pixelated;">
+                    <input type="text" id="serialInput" placeholder="Например: IE001" style="flex: 1; min-width: 150px; background: #0a0c0a; border: 2px solid #2a3a2a; color: #2ecc2e; padding: 10px; font-family: 'VT323', monospace; font-size: 1rem; outline: none;">
                     <button onclick="checkSerial()" style="background: #0a0c0a; border: 2px solid #2ecc2e; color: #2ecc2e; padding: 10px 20px; font-family: 'Press Start 2P', monospace; font-size: 0.6rem; cursor: pointer;">[ НАЙТИ ]</button>
                 </div>
-                <div id="serialResult" style="border: 1px solid #2a3a2a; padding: 15px; margin-top: 10px; min-height: 80px; display: none;">
-                    <!-- сюда будет выводиться результат -->
-                </div>
-                <p style="margin-top: 10px; color: #4a6a4a; font-size: 0.8rem;">💡 Если не знаешь номер — посмотри на упаковке или обратись в VK.</p>
+                <div id="serialResult" style="border: 1px solid #2a3a2a; padding: 15px; margin-top: 10px; display: none;"></div>
+                <p style="margin-top: 10px; color: #4a6a4a; font-size: 0.8rem;">💡 Если не знаешь номер — обратись в VK.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="polinaService" class="modal"><div class="modal-content"><div class="modal-header"><span>[ БИСЕРОПЛЕТЕНИЕ :: ПОЛИНА ]</span><button class="modal-close">[ X ]</button></div><div class="modal-body"><p>🎨 <strong>Что можно заказать:</strong></p><p>➤ Кольца и браслеты</p><p>➤ Фигурки</p><p>➤ Чокеры и подвески</p><p style="margin-top:1rem;">📩 Напиши в VK — обсудим идею.</p><a href="https://vk.me/catmotec" target="_blank" class="vk-button" style="margin-top:1rem;">ЗАКАЗАТЬ В VK</a></div></div></div>
+
+    <div id="brelkiService" class="modal"><div class="modal-content"><div class="modal-header"><span>[ БРЕЛКИ :: АЛЕКСАНДР, СЕРГЕЙ, МАКАР ]</span><button class="modal-close">[ X ]</button></div><div class="modal-body"><p>🪵 <strong>Что можно заказать:</strong></p><p>➤ Брелок-телефон</p><p>➤ Брелок-камера</p><p>➤ Брелок-планшет</p><p>➤ БрелоКот</p><p>➤ Брелок-Монстрик</p><p style="margin-top:1rem;">📩 Напиши в VK — обсудим дизайн.</p><a href="https://vk.me/catmotec" target="_blank" class="vk-button" style="margin-top:1rem;">ЗАКАЗАТЬ В VK</a></div></div></div>
+
+    <div id="codeService" class="modal"><div class="modal-content"><div class="modal-header"><span>[ ПРОГРАММИРОВАНИЕ :: АЛЕКСАНДР, ЕГОР ]</span><button class="modal-close">[ X ]</button></div><div class="modal-body"><p>💻 <strong>Что можно заказать:</strong></p><p>➤ Разработка игр (Unity/Godot)</p><p>➤ Софт и утилиты</p><p>➤ Цифровые системы</p><p>➤ Помощь с кодом</p><p style="margin-top:1rem;">📩 Напиши в VK — обсудим задачу.</p><a href="https://vk.me/catmotec" target="_blank" class="vk-button" style="margin-top:1rem;">ЗАКАЗАТЬ В VK</a></div></div></div>
+
+    <div id="artService" class="modal"><div class="modal-content"><div class="modal-header"><span>[ РИСУНКИ :: АЛИСА, АРТЁМ ]</span><button class="modal-close">[ X ]</button></div><div class="modal-body"><p>🎨 <strong>Что можно заказать:</strong></p><p>➤ Пиксельные арты</p><p>➤ Концепт-арт</p><p>➤ Иллюстрации</p><p>➤ Дизайн логотипов</p><p style="margin-top:1rem;">📩 Напиши в VK — обсудим стиль.</p><a href="https://vk.me/catmotec" target="_blank" class="vk-button" style="margin-top:1rem;">ЗАКАЗАТЬ В VK</a></div></div></div>
+
+    <div id="montageService" class="modal"><div class="modal-content"><div class="modal-header"><span>[ МОНТАЖ :: СЕРГЕЙ ]</span><button class="modal-close">[ X ]</button></div><div class="modal-body"><p>🎬 <strong>Что можно заказать:</strong></p><p>➤ Трейлеры для игр</p><p>➤ Клипы для соцсетей</p><p>➤ Нарезки</p><p>➤ Цветокоррекция и звук</p><p style="margin-top:1rem;">📩 Напиши в VK — обсудим материал.</p><a href="https://vk.me/catmotec" target="_blank" class="vk-button" style="margin-top:1rem;">ЗАКАЗАТЬ В VK</a></div></div></div>
+
+    <div id="nilufarService" class="modal"><div class="modal-content"><div class="modal-header"><span>[ ИСТОРИИ :: НИЛУФАР ]</span><button class="modal-close">[ X ]</button></div><div class="modal-body"><p>✍️ <strong>Что можно заказать:</strong></p><p>➤ Сценарий для игры</p><p>➤ Лор персонажа</p><p>➤ Короткие рассказы</p><p style="margin-top:1rem;">📩 Напиши в VK — обсудим идею.</p><a href="https://vk.me/catmotec" target="_blank" class="vk-button" style="margin-top:1rem;">ЗАКАЗАТЬ В VK</a></div></div></div>
+
+    <div id="evgeniyService" class="modal"><div class="modal-content"><div class="modal-header"><span>[ МУЗЫКА :: ЕВГЕНИЙ ]</span><button class="modal-close">[ X ]</button></div><div class="modal-body"><p>🎼 <strong>Что можно заказать:</strong></p><p>➤ Чиптюн</p><p>➤ Lo-fi / synthwave</p><p>➤ Саундтрек для игры</p><p>➤ Звуковые эффекты</p><p style="margin-top:1rem;">📩 Напиши в VK — обсудим стиль.</p><a href="https://vk.me/catmotec" target="_blank" class="vk-button" style="margin-top:1rem;">ЗАКАЗАТЬ В VK</a></div></div></div>
+
+    <div id="galleryModal" class="modal" onclick="if(event.target===this) this.style.display='none';">
+        <div class="modal-content" style="max-width: 90vw; max-height: 90vh;">
+            <div class="modal-header">
+                <span id="galleryTitle">[ ПРОСМОТР ]</span>
+                <button class="modal-close" onclick="document.getElementById('galleryModal').style.display='none';">[ X ]</button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <img id="galleryImage" src="" alt="" style="max-width: 100%; max-height: 70vh; image-rendering: pixelated; border: 2px solid #2ecc2e;">
             </div>
         </div>
     </div>
 
     <script>
-        // === ПЛАВНАЯ ПРОКРУТКА ===
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('data-nav');
                 const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                if (targetSection) targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        // === МОДАЛЬНЫЕ ОКНА ===
         const cards = document.querySelectorAll('.card');
         const modals = document.querySelectorAll('.modal');
 
         cards.forEach(card => {
-            card.addEventListener('click', (e) => {
+            card.addEventListener('click', () => {
                 const modalId = card.getAttribute('data-modal');
                 if (modalId) {
                     const modal = document.getElementById(modalId);
-                    if (modal) {
-                        modal.style.display = 'flex';
-                    }
+                    if (modal) modal.style.display = 'flex';
                 }
             });
         });
 
         modals.forEach(modal => {
             const closeBtn = modal.querySelector('.modal-close');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', () => {
-                    modal.style.display = 'none';
-                });
-            }
+            if (closeBtn) closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
             modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                }
+                if (e.target === modal) modal.style.display = 'none';
             });
         });
 
-        // === ПИКСЕЛЬНЫЙ ДОЖДЬ ===
+        let musicPlaying = false;
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const btn = document.getElementById('musicToggle');
+            if (musicPlaying) {
+                music.pause();
+                btn.textContent = '▶';
+                btn.classList.remove('playing');
+            } else {
+                music.play();
+                btn.textContent = '⏸';
+                btn.classList.add('playing');
+            }
+            musicPlaying = !musicPlaying;
+        }
+
         function createPixelRain() {
             const rainContainer = document.getElementById('pixelRain');
             const symbols = ['0', '1', '█', '▒', '◆', '■', '●', '◉', '▸', '▼'];
             const dropCount = Math.floor(Math.random() * 8) + 8;
-
             for (let i = 0; i < dropCount; i++) {
                 const drop = document.createElement('div');
                 drop.className = 'drop';
@@ -888,7 +555,6 @@
                 drop.style.animationDuration = (25 + Math.random() * 20) + 's';
                 drop.style.animationDelay = -(Math.random() * 30) + 's';
                 drop.style.opacity = 0.15 + Math.random() * 0.2;
-
                 let text = '';
                 for (let j = 0; j < 1 + Math.floor(Math.random() * 3); j++) {
                     text += symbols[Math.floor(Math.random() * symbols.length)];
@@ -897,10 +563,7 @@
                 rainContainer.appendChild(drop);
             }
         }
-
-        window.addEventListener('load', () => {
-            createPixelRain();
-        });
+        window.addEventListener('load', createPixelRain);
 
         let resizeTimeout;
         window.addEventListener('resize', () => {
@@ -911,336 +574,100 @@
             }, 500);
         });
 
-        // === СПОЙЛЕР ===
         const historyBtn = document.getElementById('historyBtn');
         const historyContent = document.getElementById('historyContent');
-
         historyBtn.addEventListener('click', () => {
             historyContent.classList.toggle('show');
             historyBtn.innerHTML = historyContent.classList.contains('show') ?
-                '[ ▲ СВЕРНУТЬ ИСТОРИЮ СТУДИИ ▲ ]' :
-                '[ ▼ РАСКРЫТЬ ИСТОРИЮ СТУДИИ ▼ ]';
+                '[ ▲ СВЕРНУТЬ ИСТОРИЮ СТУДИИ ▲ ]' : '[ ▼ РАСКРЫТЬ ИСТОРИЮ СТУДИИ ▼ ]';
         });
 
-        // === БАЗА ДАННЫХ СЕРИЙНЫХ НОМЕРОВ ===
-        const seria = {
-            "IE001": {
-                "producer": "Catmotec",
-                "brand": "Apple",
-                "model": "iPhone 17 Pro Max",
-                "color": "голубой",
-                "sim_type": "SIM-лоток отсутствует",
-                "release_year": "09.2025",
-                "price": "59₽",
-                "article": "BRT1",
-                "user": "Александр (Крылов)"
-            },
-            "SA001": {
-                "producer": "Catmotec",
-                "brand": "Samsung",
-                "model": "Galaxy S25 Ultra",
-                "color": "чёрный",
-                "sim_type": "SIM-лоток есть",
-                "release_year": "10.2025",
-                "price": "59₽",
-                "article": "BRT1",
-                "user": "Евгений (Крылов)"
-            },
-            "IE002": {
-                "producer": "Catmotec",
-                "brand": "Apple",
-                "model": "iPhone 17 Pro Max",
-                "color": "красный",
-                "sim_type": "SIM-лоток отсутствует",
-                "release_year": "10.2025",
-                "price": "59₽",
-                "article": "BRT1",
-                "user": "Анастасия (Александрова)"
-            },
-            "IE003": {
-                "producer": "Catmotec",
-                "brand": "Apple",
-                "model": "iPhone 17 Pro",
-                "color": "белый",
-                "sim_type": "SIM-лоток есть",
-                "release_year": "10.2025",
-                "price": "59₽",
-                "article": "BRT1",
-                "user": "Роман (Васильев)"
-            },
-            "IE004": {
-                "producer": "Catmotec",
-                "brand": "Apple",
-                "model": "iPhone 13",
-                "color": "черный",
-                "sim_type": "SIM-лоток отсутствует",
-                "release_year": "10.2025",
-                "price": "39₽",
-                "article": "BRT1",
-                "user": "Алиса (Федотова)"
-            },
-            "IE005": {
-                "producer": "Catmotec",
-                "brand": "Apple",
-                "model": "iPhone 17",
-                "color": "голубой",
-                "sim_type": "SIM-лоток есть",
-                "release_year": "11.2025",
-                "price": "49₽",
-                "article": "BRT1",
-                "user": "Нина (Михайлова)"
-            },
-            "BR002": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок (Haval)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "07.2026",
-                "price": "99₽",
-                "article": "BRZ1",
-                "user": "Сергей (Крылов)"
-            },
-            "BR003": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок (Niva)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "07.2026",
-                "price": "99₽",
-                "article": "BRZ1",
-                "user": "Сергей (Крылов)"
-            },
-            "BM001": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "199₽",
-                "article": "BRM1",
-                "user": "Нина (Михайлова)"
-            },
-            "SE001": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик (деформированный)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "07.2026",
-                "price": "169₽",
-                "article": "BRM1",
-                "user": "Александр (Крылов)"
-            },
-            "SE002": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик (деформированный)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "07.2026",
-                "price": "169₽",
-                "article": "BRT1",
-                "user": "Евгений (Крылов)"
-            },
-            "SE003": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик (деформированный)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "169₽",
-                "article": "BRT1",
-                "user": "Сергей (Андропов)"
-            },
-            "SE004": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик (деформированный)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "169₽",
-                "article": "BRT1",
-                "user": "Макар (Спиридонов)"
-            },
-            "BR004": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "БрелоКот (Серик)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "149₽",
-                "article": "BRC1",
-                "user": ""
-            },
-            "BR005": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "БрелоКот (Моня)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "149₽",
-                "article": "BRC1",
-                "user": ""
-            },
-            "BR006": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "БрелоКот (Гоня)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "149₽",
-                "article": "BRC1",
-                "user": ""
-            },
-            "BR007": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "БрелоКот (Маня)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "149₽",
-                "article": "BRC1",
-                "user": ""
-            },
-            "BM002": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "249₽",
-                "article": "BRM1",
-                "user": "Анастсия (Павлова)"
-            },
-            "BM003": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "249₽",
-                "article": "BRM1",
-                "user": "Владимир (Крылов)"
-            },
-            "BM004": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "249₽",
-                "article": "BRM1",
-                "user": "Надежда (Русакова)"
-            },
-            "BM005": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "249₽",
-                "article": "BRM2",
-                "user": "Анастасия (Александрова)"
-            },
-            "BM006": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "09.2026",
-                "price": "249₽",
-                "article": "BRM2",
-                "user": ""
-            },
-            "BM007": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "09.2026",
-                "price": "249₽",
-                "article": "BRM2",
-                "user": "Галина (Николаева)"
-            },
-            "BM008": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок-Монстрик",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "09.2026",
-                "price": "249₽",
-                "article": "BRM2",
-                "user": "Светлана (Маркина)"
-            },
-            "BR009": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок (A/T)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "09.2026",
-                "price": "149₽",
-                "article": "BRZ1",
-                "user": "Нилуфар (Антоширинова)"
-            },
-            "BR008": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок (Niva)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "08.2026",
-                "price": "69₽",
-                "article": "BRZ1",
-                "user": "Сергей (Крылов)"
-            },
-            "BR001": {
-                "producer": "Catmotec",
-                "brand": "CMT",
-                "model": "Брелок (Toyota)",
-                "color": "Разноцветный",
-                "sim_type": "SIM-лоток отсутствует в данной версии",
-                "release_year": "06.2026",
-                "price": "69₽",
-                "article": "BRZ1",
-                "user": "Евгений (Крылов)"
+        const releaseDate = new Date('2035-07-01T00:00:00').getTime();
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = releaseDate - now;
+            if (distance < 0) {
+                ['days','hours','minutes','seconds'].forEach(id => document.getElementById(id).textContent = '00');
+                return;
             }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        function openGallery(src, title) {
+            document.getElementById('galleryImage').src = src;
+            document.getElementById('galleryTitle').textContent = '[ ' + title + ' ]';
+            document.getElementById('galleryModal').style.display = 'flex';
+        }
+
+        function sendReview() {
+            const name = document.getElementById('reviewName').value.trim();
+            const rating = document.getElementById('reviewRating').value;
+            const text = document.getElementById('reviewText').value.trim();
+            if (!name || !text) { alert('❌ Заполни имя и текст отзыва!'); return; }
+            let stars = '';
+            for (let i = 0; i < parseInt(rating); i++) stars += '⭐';
+            const message = `Отзыв для Catmotec:\n\n${stars}\n"${text}"\n\n— ${name}`;
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://vk.me/catmotec?text=${encodedMessage}`, '_blank');
+            document.getElementById('reviewName').value = '';
+            document.getElementById('reviewText').value = '';
+            document.getElementById('reviewRating').value = '5';
+            alert('✅ Спасибо! Открывается VK — отправь там сообщение.');
+        }
+
+        const seria = {
+            "IE001": { "producer": "Catmotec", "brand": "Apple", "model": "iPhone 17 Pro Max", "color": "голубой", "sim_type": "SIM-лоток отсутствует", "release_year": "09.2025", "price": "59₽", "article": "BRT1", "user": "Александр (Крылов)" },
+            "SA001": { "producer": "Catmotec", "brand": "Samsung", "model": "Galaxy S25 Ultra", "color": "чёрный", "sim_type": "SIM-лоток есть", "release_year": "10.2025", "price": "59₽", "article": "BRT1", "user": "Евгений (Крылов)" },
+            "IE002": { "producer": "Catmotec", "brand": "Apple", "model": "iPhone 17 Pro Max", "color": "красный", "sim_type": "SIM-лоток отсутствует", "release_year": "10.2025", "price": "59₽", "article": "BRT1", "user": "Анастасия (Александрова)" },
+            "IE003": { "producer": "Catmotec", "brand": "Apple", "model": "iPhone 17 Pro", "color": "белый", "sim_type": "SIM-лоток есть", "release_year": "10.2025", "price": "59₽", "article": "BRT1", "user": "Роман (Васильев)" },
+            "IE004": { "producer": "Catmotec", "brand": "Apple", "model": "iPhone 13", "color": "черный", "sim_type": "SIM-лоток отсутствует", "release_year": "10.2025", "price": "39₽", "article": "BRT1", "user": "Алиса (Федотова)" },
+            "IE005": { "producer": "Catmotec", "brand": "Apple", "model": "iPhone 17", "color": "голубой", "sim_type": "SIM-лоток есть", "release_year": "11.2025", "price": "49₽", "article": "BRT1", "user": "Нина (Михайлова)" },
+            "BR002": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок (Haval)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "07.2026", "price": "99₽", "article": "BRZ1", "user": "Сергей (Крылов)" },
+            "BR003": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок (Niva)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "07.2026", "price": "99₽", "article": "BRZ1", "user": "Сергей (Крылов)" },
+            "BM001": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "199₽", "article": "BRM1", "user": "Нина (Михайлова)" },
+            "SE001": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик (деформированный)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "07.2026", "price": "169₽", "article": "BRM1", "user": "Александр (Крылов)" },
+            "SE002": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик (деформированный)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "07.2026", "price": "169₽", "article": "BRT1", "user": "Евгений (Крылов)" },
+            "SE003": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик (деформированный)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "169₽", "article": "BRT1", "user": "Сергей (Андропов)" },
+            "SE004": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик (деформированный)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "169₽", "article": "BRT1", "user": "Макар (Спиридонов)" },
+            "BR004": { "producer": "Catmotec", "brand": "CMT", "model": "БрелоКот (Серик)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "149₽", "article": "BRC1", "user": "" },
+            "BR005": { "producer": "Catmotec", "brand": "CMT", "model": "БрелоКот (Моня)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "149₽", "article": "BRC1", "user": "" },
+            "BR006": { "producer": "Catmotec", "brand": "CMT", "model": "БрелоКот (Гоня)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "149₽", "article": "BRC1", "user": "" },
+            "BR007": { "producer": "Catmotec", "brand": "CMT", "model": "БрелоКот (Маня)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "149₽", "article": "BRC1", "user": "" },
+            "BM002": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "249₽", "article": "BRM1", "user": "Анастсия (Павлова)" },
+            "BM003": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "249₽", "article": "BRM1", "user": "Владимир (Крылов)" },
+            "BM004": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "249₽", "article": "BRM1", "user": "Надежда (Русакова)" },
+            "BM005": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "249₽", "article": "BRM2", "user": "Анастасия (Александрова)" },
+            "BM006": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "09.2026", "price": "249₽", "article": "BRM2", "user": "Дмитрий (Васильев)" },
+            "BM007": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "09.2026", "price": "249₽", "article": "BRM2", "user": "Галина (Николаева)" },
+            "BM008": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок-Монстрик", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "09.2026", "price": "249₽", "article": "BRM2", "user": "Светлана (Маркина)" },
+            "BR009": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок (A/T)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "09.2026", "price": "149₽", "article": "BRZ1", "user": "Нилуфар (Антоширинова)" },
+            "BR008": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок (Niva)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "08.2026", "price": "69₽", "article": "BRZ1", "user": "Сергей (Крылов)" },
+            "BR001": { "producer": "Catmotec", "brand": "CMT", "model": "Брелок (Toyota)", "color": "Разноцветный", "sim_type": "SIM-лоток отсутствует в данной версии", "release_year": "06.2026", "price": "69₽", "article": "BRZ1", "user": "Евгений (Крылов)" }
         };
 
-        // === ФУНКЦИЯ ПРОВЕРКИ СЕРИЙНОГО НОМЕРА ===
         function checkSerial() {
             const input = document.getElementById('serialInput').value.trim().toUpperCase();
             const resultDiv = document.getElementById('serialResult');
-
             if (!input) {
                 resultDiv.style.display = 'block';
                 resultDiv.innerHTML = '<p style="color: #ff6666;">❌ Введи серийный номер!</p>';
                 return;
             }
-
             const info = seria[input];
             if (!info) {
                 resultDiv.style.display = 'block';
-                resultDiv.innerHTML = `<p style="color: #ff6666;">❌ Упс, я не нашёл гаджет с номером <strong>${input}</strong>. :(<br>Проверь номер или напиши в VK.</p>`;
+                resultDiv.innerHTML = `<p style="color: #ff6666;">❌ Не нашёл номер <strong>${input}</strong>.</p>`;
                 return;
             }
-
             resultDiv.style.display = 'block';
             resultDiv.innerHTML = `
                 <p style="color: #2ecc2e;">🎉 Ура! Я нашёл его :D!</p>
@@ -1250,18 +677,14 @@
                 <p><strong>🎨 Цвет:</strong> ${info.color}</p>
                 <p><strong>💳 Слот:</strong> ${info.sim_type}</p>
                 <p><strong>📅 Год выпуска:</strong> ${info.release_year}</p>
-                <p><strong>💰 Цена на момент покупки:</strong> ${info.price}</p>
-                <p><strong>📟 Артикул товара:</strong> ${info.article || '—'}</p>
-                <p><strong>🧍‍♂️ Покупатель:</strong> ${info.user || 'не указан'}</p>
-                <p style="margin-top: 10px; color: #4a6a4a;">-------------------------------------------------------</p>
+                <p><strong>💰 Цена:</strong> ${info.price}</p>
+                <p><strong>📟 Артикул:</strong> ${info.article || '—'}</p>
+                <p><strong>🧍 Покупатель:</strong> ${info.user || 'не указан'}</p>
             `;
         }
 
-        // === ПОИСК ПО НАЖАТИЮ ENTER ===
         document.getElementById('serialInput').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                checkSerial();
-            }
+            if (e.key === 'Enter') checkSerial();
         });
     </script>
 
